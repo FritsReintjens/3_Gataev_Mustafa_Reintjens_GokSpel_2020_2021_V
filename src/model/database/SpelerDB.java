@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @Author team
+ */
 public class SpelerDB {
     Map<String, Speler> spelers;
 
@@ -19,7 +22,7 @@ public class SpelerDB {
 
     public void scanFile() {
         try {
-            File spelersFile = new File("../../bestanden/speler.txt");
+            File spelersFile = new File("src/bestanden/speler.txt");
             Scanner scanner = new Scanner(spelersFile);
             while (scanner.hasNextLine()) {
                 String regel = scanner.nextLine();
@@ -52,5 +55,7 @@ public class SpelerDB {
         }
     }
 
-
+    public Map<String, Speler> getSpelers() {
+        return spelers;
+    }
 }

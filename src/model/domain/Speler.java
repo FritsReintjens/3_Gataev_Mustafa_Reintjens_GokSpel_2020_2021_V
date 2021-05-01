@@ -2,6 +2,9 @@ package model.domain;
 
 import java.util.Objects;
 
+/**
+ * @Author team
+ */
 public class Speler {
     private String voornaam, familienaam, spelersnaam;
     private double goksaldo;
