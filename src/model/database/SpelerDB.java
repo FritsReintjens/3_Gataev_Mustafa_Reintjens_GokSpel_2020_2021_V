@@ -2,10 +2,7 @@ package model.database;
 
 import model.domain.Speler;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -16,44 +13,25 @@ public class SpelerDB extends TekstLoadSaveTemplate{
 
 
     public SpelerDB() throws FileNotFoundException {
-        this.spelers = new HashMap<>();
-        scanFile();
+        this.spelers = load("speler");
     }
 
-    public void scanFile() {
-        try {
-            File spelersFile = new File("src/bestanden/speler.txt");
-            Scanner scanner = new Scanner(spelersFile);
-            while (scanner.hasNextLine()) {
-                String regel = scanner.nextLine();
-                List<String> lijst = Arrays.asList(regel.split(","));
-                Speler speler = new Speler(lijst.get(1), lijst.get(0), lijst.get(2), Double.parseDouble(lijst.get(3)));
-                spelers.put(speler.getSpelersnaam(),speler);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public Speler objectVanString(String regel) {
+        List<String> lijst = Arrays.asList(regel.split(","));
+        Speler speler = new Speler(lijst.get(1), lijst.get(0), lijst.get(2), Double.parseDouble(lijst.get(3)));
+        return speler;
     }
 
-    public void saveFile(){
-        try{
-            FileWriter fileWriter = new FileWriter("../../bestanden/speler.txt");
-/*            Iterator<String> spelerIterator = spelers.keySet().iterator();
-            while(spelerIterator.hasNext()){
-                String key = spelerIterator.next();
-                Speler s = spelers.get(key);
-                fileriter.write(speler.toTextBestand());
-            }*/
+    @Override
+    public String getKeyOfObject(Object o) {
+        String spelersnaam = ((Speler)o).getSpelersnaam();
+        return spelersnaam;
+    }
 
-            for(Map.Entry mapElement : spelers.entrySet()){
-                Speler speler = (Speler)mapElement.getValue();
-                fileWriter.write(speler.toTextBestand());
-            }
-            fileWriter.close();
-        } catch(IOException e){
-            System.out.println(e.getMessage());
-        }
+    @Override
+    protected String toBestand(Object o) {
+        return ((Speler)o).toTextBestand();
     }
 
     public Map<String, Speler> getSpelers() {
