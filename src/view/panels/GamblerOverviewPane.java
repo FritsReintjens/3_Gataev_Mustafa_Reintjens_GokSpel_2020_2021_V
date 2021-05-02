@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author team
+ * @author team
  */
 public class GamblerOverviewPane extends GridPane{
 	private SpelerDB spelerDB;

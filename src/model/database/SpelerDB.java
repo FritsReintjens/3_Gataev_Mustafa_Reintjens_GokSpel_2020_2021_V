@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @Author team
+ * @author team
  */
-public class SpelerDB {
-    Map<String, Speler> spelers;
+public class SpelerDB extends TekstLoadSaveTemplate{
+    private Map<String, Speler> spelers;
 
 
     public SpelerDB() throws FileNotFoundException {
@@ -30,6 +30,7 @@ public class SpelerDB {
                 Speler speler = new Speler(lijst.get(1), lijst.get(0), lijst.get(2), Double.parseDouble(lijst.get(3)));
                 spelers.put(speler.getSpelersnaam(),speler);
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }

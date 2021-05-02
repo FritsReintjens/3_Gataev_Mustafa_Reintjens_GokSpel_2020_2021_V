@@ -3,7 +3,7 @@ package model.domain;
 import java.util.Objects;
 
 /**
- * @Author team
+ * @author team
  */
 public class Speler {
     private String voornaam, familienaam, spelersnaam;
