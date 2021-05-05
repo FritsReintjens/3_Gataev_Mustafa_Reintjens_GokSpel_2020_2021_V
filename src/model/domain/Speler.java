@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author team
  */
-public class Speler {
+public class Speler implements Comparable{
     private String voornaam, familienaam, spelersnaam;
     private double goksaldo;
 
@@ -85,5 +85,10 @@ public class Speler {
     @Override
     public int hashCode() {
         return Objects.hash(spelersnaam);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.spelersnaam.compareTo(((Speler)o).getSpelersnaam());
     }
 }
