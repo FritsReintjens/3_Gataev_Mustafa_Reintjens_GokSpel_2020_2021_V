@@ -1,11 +1,11 @@
-package model.domain;
+package model;
 
 import java.util.Objects;
 
 /**
  * @author team
  */
-public class Speler implements Comparable<Speler>{
+public class Speler /*implements Comparable<Speler>*/{
     private String voornaam, familienaam, spelersnaam;
     private double goksaldo;
 
@@ -87,8 +87,8 @@ public class Speler implements Comparable<Speler>{
         return Objects.hash(spelersnaam);
     }
 
-    @Override
+    /*@Override
     public int compareTo(Speler andereSpeler) {
         return this.getSpelersnaam().compareTo(andereSpeler.getSpelersnaam());
-    }
+    }*/
 }
