@@ -10,10 +10,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import jxl.read.biff.BiffException;
 import model.database.SpelerDB;
 import model.Speler;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * @author team
@@ -28,6 +30,10 @@ public class GamblerOverviewPane extends GridPane{
 			this.spelerDB = new SpelerDB();
 		}catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (BiffException e) {
+			e.printStackTrace();
 		}
 
 		this.setPadding(new Insets(5, 5, 5, 5));

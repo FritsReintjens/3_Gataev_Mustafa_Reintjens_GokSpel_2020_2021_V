@@ -1,10 +1,14 @@
 package model.database;
 
+import jxl.read.biff.BiffException;
+import model.database.loadSaveStrategy.LoadSaveFactory;
 import model.database.loadSaveStrategy.LoadSaveStrategy;
+import model.database.loadSaveStrategy.SpelerExcelLoadSaveStrategy;
 import model.database.loadSaveStrategy.SpelerTekstLoadSaveStrategy;
 import model.Speler;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -15,8 +19,11 @@ public class SpelerDB {
     private LoadSaveStrategy loadSaveStrategy;
 
 
-    public SpelerDB() throws FileNotFoundException {
-        loadSaveStrategy = new SpelerTekstLoadSaveStrategy();
+    public SpelerDB() throws IOException, BiffException {
+        LoadSaveFactory factory = LoadSaveFactory.getInstance();
+        //TODO
+        //Parameter implementeren
+        loadSaveStrategy = factory.createLoadSaveStrategy("EXCEL");
         this.spelers = loadSaveStrategy.load("speler");
     }
 
