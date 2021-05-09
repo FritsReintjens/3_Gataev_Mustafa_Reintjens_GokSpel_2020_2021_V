@@ -1,14 +1,17 @@
 package view;
 
 
+import controller.SpelVerloopPaneController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import view.panels.GamblerOverviewPane;
+import view.panels.SpelVerloopPane;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(){		
-	    TabPane tabPane = new TabPane(); 	    
+	public AdminMainPane(/*SpelVerloopPaneController spelVerloopPaneController*/){
+	    TabPane tabPane = new TabPane();
+        /*SpelVerloopPane spelVerloopPane = new SpelVerloopPane(spelVerloopPaneController);*/
         Tab spelVerloopTab = new Tab("Spelverloop");
         GamblerOverviewPane gamblerOverviewPane = new GamblerOverviewPane();
         Tab spelerTab = new Tab("Spelers",gamblerOverviewPane);
