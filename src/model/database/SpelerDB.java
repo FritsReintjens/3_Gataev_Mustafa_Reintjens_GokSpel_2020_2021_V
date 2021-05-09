@@ -31,4 +31,6 @@ public class SpelerDB {
         TreeMap<String, Speler> sorted = new TreeMap<>(this.spelers);
         return sorted;
     }
+
+    //Moet DB ook singleton?
 }
