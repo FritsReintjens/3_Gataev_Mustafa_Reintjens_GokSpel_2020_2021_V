@@ -6,7 +6,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import view.panels.GamblerOverviewPane;
+import view.panels.InstellingenPane;
 import view.panels.SpelVerloopPane;
+import view.panels.StatistiekenPane;
 
 public class AdminMainPane extends BorderPane {
 	public AdminMainPane(/*SpelVerloopPaneController spelVerloopPaneController*/){
@@ -14,6 +16,8 @@ public class AdminMainPane extends BorderPane {
         /*SpelVerloopPane spelVerloopPane = new SpelVerloopPane(spelVerloopPaneController);*/
         Tab spelVerloopTab = new Tab("Spelverloop");
         GamblerOverviewPane gamblerOverviewPane = new GamblerOverviewPane();
+        InstellingenPane instellingenPane = new InstellingenPane();
+        StatistiekenPane statistiekenPane = new StatistiekenPane();
         Tab spelerTab = new Tab("Spelers",gamblerOverviewPane);
         Tab instellingTab = new Tab("Instellingen");
         Tab statistiekTab = new Tab("Staitieken");

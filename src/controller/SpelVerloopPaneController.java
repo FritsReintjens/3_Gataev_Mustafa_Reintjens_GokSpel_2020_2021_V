@@ -8,7 +8,7 @@ public class SpelVerloopPaneController implements Observer {
     private SpelVerloopPane spelVerloopPane;
     private Spel spel;
 
-    public SpelVerloopPaneController(Spel spel, SpelVerloopPane spelVerloopPane){
+    public SpelVerloopPaneController(Spel spel){
         this.spel = spel;
         this.spelVerloopPane = spelVerloopPane;
         spel.registerObserver(this);
