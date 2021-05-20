@@ -1,7 +1,7 @@
-Jansens,Jan,JeJe,100
-Ickx,Johannes,JoJo,100
-Vanheel,Anneke,Popje,100
-Jansens,Rik,Rikske,100
+Jansens,Jan,JeJe,1000
+Ickx,Johannes,JoJo,700
+Vanheel,Anneke,Popje,120
+Jansens,Rik,Rikske,80
 Vanas,Ken,DenKen,100
-Dox,Manouche,Woef,100
-Cox,Frederic,Fre,100
+Dox,Manouche,Woef,70
+Cox,Frederic,Fre,90

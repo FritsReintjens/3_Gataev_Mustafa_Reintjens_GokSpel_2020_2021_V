@@ -20,6 +20,8 @@ public class GokSpelMain extends Application {
 		AdminView adminView = new AdminView(adminController);
 		GamblerViewController gamblerViewController = new GamblerViewController(facadeSpel);
 		GamblerView gamblerView = new GamblerView(gamblerViewController);
+
+
 	}
 	
 	public static void main(String[] args) {

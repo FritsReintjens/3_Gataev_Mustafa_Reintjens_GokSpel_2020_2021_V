@@ -23,7 +23,7 @@ public class SpelerDB {
         LoadSaveFactory factory = LoadSaveFactory.getInstance();
         //TODO
         //Parameter implementeren
-        loadSaveStrategy = factory.createLoadSaveStrategy("EXCEL");
+        loadSaveStrategy = factory.createLoadSaveStrategy("TEKST");
         this.spelers = loadSaveStrategy.load("speler");
     }
 

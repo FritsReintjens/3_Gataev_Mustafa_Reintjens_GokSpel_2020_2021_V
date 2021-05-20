@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Spel implements Observable {
     private SpelerDB spelerDB;
+    private SpelState spelState;
     private Collection<Observer> observers = new ArrayList<>();
 
     public Spel() throws BiffException, IOException {

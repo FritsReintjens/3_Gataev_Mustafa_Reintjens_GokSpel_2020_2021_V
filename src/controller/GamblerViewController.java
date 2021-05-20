@@ -14,6 +14,10 @@ public class GamblerViewController implements Observer {
         spel.registerObserver(this);
     }
 
+    public Spel getSpel() {
+        return spel;
+    }
+
     public void setView(GamblerView view){
         this.gamblerView = view;
     }
