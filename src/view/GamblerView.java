@@ -27,6 +27,7 @@ public class GamblerView extends GridPane {
     private RadioButton rgs1,rgs2,rgs3;
     private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113;
     private VBox p0 ,p2 ,p3 ,p11 ,p12 ,p221 ,p222 ,p321 ,p322;
+    private int aantalWorpen;
 
     public GamblerView(GamblerViewController controller) {
 
@@ -90,10 +91,14 @@ public class GamblerView extends GridPane {
         p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label);
 
         this.p321 = new VBox();
-        this.w1Label = new Label("werp1");
-        this.w2Label = new Label("werp2");
-        this.w3Label = new Label("werp3");
-        this.w4Label = new Label("werp4");
+        this.w1Label = new Label("worp1 :");
+        this.w2Label = new Label("werp2 :");
+        this.w3Label = new Label("werp3 :");
+        this.w4Label = new Label("werp4 :");
+        w1Label.setVisible(false);
+        w2Label.setVisible(false);
+        w3Label.setVisible(false);
+        w4Label.setVisible(false);
         p321.getChildren().addAll(w1Label,w2Label,w3Label,w4Label);
 
 
@@ -110,7 +115,6 @@ public class GamblerView extends GridPane {
         p12.getChildren().addAll(errorKader1);
 
 
-        //DEEL 2
         this.p21 = new HBox(10);
         this.kiesStrategyLabel = new Label("Kies je gok strategie uit de volgende lijst");
         p21.getChildren().addAll(kiesStrategyLabel);
@@ -123,10 +127,10 @@ public class GamblerView extends GridPane {
 
         this.p31 = new HBox(10);
         this.werpButton = new Button("werp dobbelsteen");
+        werpButton.setOnAction(event -> werpDobbelsteen());
         p31.getChildren().addAll(werpButton);
         this.p32 = new HBox(10);
         p32.getChildren().addAll(p321,p322);
-
 
 
         this.p1 = new HBox(10);
@@ -201,5 +205,14 @@ public class GamblerView extends GridPane {
 
     public void bevestigKeuze(){
         this.p3.setVisible(true);
+    }
+
+    public void werpDobbelsteen(){
+        if (aantalWorpen > 0 && aantalWorpen <= 4){
+            Label temp =(Label) p321.getChildren().get(aantalWorpen-1);
+            temp.setText("test" + aantalWorpen);
+            temp.setVisible(true);
+        }
+        aantalWorpen++;
     }
 }
