@@ -25,6 +25,8 @@ public class GamblerView extends GridPane {
     private TextField spelerField, inzetField;
     private Button startButton,bevestigButton, werpButton;
     private RadioButton rgs1,rgs2,rgs3;
+    private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113;
+    private VBox p0 ,p2 ,p3 ,p11 ,p12 ,p221 ,p222 ,p321 ,p322;
 
     public GamblerView(GamblerViewController controller) {
 
@@ -47,7 +49,7 @@ public class GamblerView extends GridPane {
 
     private Pane createNodeHierarchy() {
 
-        HBox p111 = new HBox(10);
+        this.p111 = new HBox(10);
         this.spelerLabel = new Label("wat is je spelersnaam? ");
         this.spelerField = new TextField();
         spelerField.setOnAction(event -> checkNaamInput(spelerField.getText()));
@@ -55,7 +57,7 @@ public class GamblerView extends GridPane {
         p111.getChildren().addAll(spelerLabel,spelerField,goksaldoLabel);
 
 
-        HBox p112 = new HBox(10);
+        this.p112 = new HBox(10);
         this.inzetLabel = new Label("wat is je inzet? ");
         inzetLabel.setVisible(false);
         this.inzetField = new TextField();
@@ -63,14 +65,15 @@ public class GamblerView extends GridPane {
         inzetField.setOnAction(event -> checkInzetInput(inzetField.getText()));
         p112.getChildren().addAll(inzetLabel,inzetField);
 
-        HBox p113 = new HBox(10);
+        this.p113 = new HBox(10);
         this.startButton = new Button("Start gokspel");
         this.startButton.setVisible(false);
+        startButton.setOnAction(event -> startGokspel());
         //startButton.setOnAction(event -> checkInput(spelerField.getText(), inzetField.getText()));
         p113.getChildren().addAll(startButton);
 
 
-        VBox p221 = new VBox(10);
+        this.p221 = new VBox(10);
         final ToggleGroup tGroup = new ToggleGroup();
         this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een" + "even" +" getal");
         rgs1.setToggleGroup(tGroup);
@@ -80,62 +83,64 @@ public class GamblerView extends GridPane {
         this.rgs3 = new RadioButton("het aantal ogen is bij elke worp" + "hoger" + "dan bij de vorige worp");
         rgs3.setToggleGroup(tGroup);
         p221.getChildren().addAll(rgs1, rgs2, rgs3);
-        VBox p222 = new VBox(10);
+        this.p222 = new VBox(10);
         this.strategy1Label = new Label("mogelijke winst is " + 4 + "x je inzet");
         this.strategy2Label = new Label("mogelijke winst is " + 5 + "x je inzet");
         this.strategy3Label = new Label("mogelijke winst is " + 10 + "x je inzet");
         p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label);
 
-        VBox p321 = new VBox();
+        this.p321 = new VBox();
         this.w1Label = new Label("werp1");
         this.w2Label = new Label("werp2");
         this.w3Label = new Label("werp3");
         this.w4Label = new Label("werp4");
         p321.getChildren().addAll(w1Label,w2Label,w3Label,w4Label);
 
-        VBox p322 = new VBox();
+
+        this.p322 = new VBox();
         this.resultLabel = new Label("enter resultaat hier");
         this.nieuweGoksaldoLabel = new Label("enter nieuwe goksaldo hier");
         p322.getChildren().addAll(resultLabel, nieuweGoksaldoLabel);
 
 
-
-        VBox p11 = new VBox(10);
+        this.p11 = new VBox(10);
         p11.getChildren().addAll(p111,p112,p113);
-        VBox p12 = new VBox(10);
+        this.p12 = new VBox(10);
         this.errorKader1 = new Label("");
         p12.getChildren().addAll(errorKader1);
 
 
         //DEEL 2
-        HBox p21 = new HBox(10);
+        this.p21 = new HBox(10);
         this.kiesStrategyLabel = new Label("Kies je gok strategie uit de volgende lijst");
         p21.getChildren().addAll(kiesStrategyLabel);
-        HBox p22 = new HBox(10);
+        this.p22 = new HBox(10);
         p22.getChildren().addAll(p221,p222);
-
-        HBox p23 = new HBox(10);
+        this.p23 = new HBox(10);
         this.bevestigButton = new Button("bevestig je keuze");
+        bevestigButton.setOnAction(event -> bevestigKeuze());
         p23.getChildren().addAll(bevestigButton);
 
-        HBox p31 = new HBox(10);
+        this.p31 = new HBox(10);
         this.werpButton = new Button("werp dobbelsteen");
         p31.getChildren().addAll(werpButton);
-        HBox p32 = new HBox(10);
+        this.p32 = new HBox(10);
         p32.getChildren().addAll(p321,p322);
 
 
 
-        HBox p1 = new HBox(10);
+        this.p1 = new HBox(10);
         p1.getChildren().addAll(p11,p12);
-        VBox p2 = new VBox(10);
+        this.p2 = new VBox(10);
         p2.getChildren().addAll(p21,p22,p23);
-        VBox p3 = new VBox(10);
+        p2.setVisible(false);
+        this.p3 = new VBox(10);
         p3.getChildren().addAll(p31,p32);
-        VBox p0 = new VBox(10);
+        p3.setVisible(false);
+        this.p0 = new VBox(10);
         p0.getChildren().addAll(p1,p2,p3);
 
-        return p0;
+        return this.p0;
     }
 
     public void checkNaamInput(String spelersNaam){
@@ -157,8 +162,11 @@ public class GamblerView extends GridPane {
             this.inzetField.setVisible(false);
             this.inzetLabel.setVisible(false);
             this.startButton.setVisible(false);
+            this.goksaldoLabel.setText("");
             this.errorKader1.setText("Naam niet gevonden, probeer opnieuw");
             this.errorKader1.setTextFill(Color.RED);
+            p2.setVisible(false);
+            p3.setVisible(false);
         }
 
     }
@@ -174,11 +182,23 @@ public class GamblerView extends GridPane {
                 this.errorKader1.setVisible(true);
                 this.errorKader1.setText("Ongeldige inzet");
                 this.errorKader1.setTextFill(Color.RED);
+                this.p2.setVisible(false);
+                this.p3.setVisible(false);
             }
         }catch(Exception e){
             this.errorKader1.setVisible(true);
             this.errorKader1.setText("Hier mogen enkel cijfers ingevuld worden");
             this.errorKader1.setTextFill(Color.RED);
+            this.p2.setVisible(false);
+            this.p3.setVisible(false);
         }
+    }
+
+    public void startGokspel(){
+        this.p2.setVisible(true);
+    }
+
+    public void bevestigKeuze(){
+        this.p3.setVisible(true);
     }
 }
