@@ -163,6 +163,7 @@ public class GamblerView extends GridPane {
             this.inzetLabel.setVisible(false);
             this.startButton.setVisible(false);
             this.goksaldoLabel.setText("");
+            this.errorKader1.setVisible(true);
             this.errorKader1.setText("Naam niet gevonden, probeer opnieuw");
             this.errorKader1.setTextFill(Color.RED);
             p2.setVisible(false);
