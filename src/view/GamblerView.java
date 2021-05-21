@@ -92,9 +92,9 @@ public class GamblerView extends GridPane {
 
         this.p321 = new VBox();
         this.w1Label = new Label("worp1 :");
-        this.w2Label = new Label("werp2 :");
-        this.w3Label = new Label("werp3 :");
-        this.w4Label = new Label("werp4 :");
+        this.w2Label = new Label("worp2 :");
+        this.w3Label = new Label("worp3 :");
+        this.w4Label = new Label("worp4 :");
         w1Label.setVisible(false);
         w2Label.setVisible(false);
         w3Label.setVisible(false);
@@ -106,6 +106,7 @@ public class GamblerView extends GridPane {
         this.resultLabel = new Label("enter resultaat hier");
         this.nieuweGoksaldoLabel = new Label("enter nieuwe goksaldo hier");
         p322.getChildren().addAll(resultLabel, nieuweGoksaldoLabel);
+        p322.setVisible(false);
 
 
         this.p11 = new VBox(10);
@@ -201,6 +202,8 @@ public class GamblerView extends GridPane {
 
     public void startGokspel(){
         this.p2.setVisible(true);
+        this.inzetField.setDisable(true);
+        this.spelerField.setDisable(true);
     }
 
     public void bevestigKeuze(){
@@ -211,6 +214,7 @@ public class GamblerView extends GridPane {
         aantalWorpen++;
         if (aantalWorpen > 0 && aantalWorpen <= 4){
             p321.setVisible(true);
+            p322.setVisible(false);
             Label temp =(Label) p321.getChildren().get(aantalWorpen-1);
             temp.setText("Worp " + aantalWorpen + ": "  + (int)(Math.random()*6+1));
             temp.setVisible(true);

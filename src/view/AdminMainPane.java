@@ -11,10 +11,11 @@ import view.panels.SpelVerloopPane;
 import view.panels.StatistiekenPane;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(/*SpelVerloopPaneController spelVerloopPaneController*/){
+	public AdminMainPane(GamblerOverviewPaneC,SpelVerloopPaneController spelVerloopPaneController*/){
 	    TabPane tabPane = new TabPane();
         /*SpelVerloopPane spelVerloopPane = new SpelVerloopPane(spelVerloopPaneController);*/
         Tab spelVerloopTab = new Tab("Spelverloop");
+
         GamblerOverviewPane gamblerOverviewPane = new GamblerOverviewPane();
         InstellingenPane instellingenPane = new InstellingenPane();
         StatistiekenPane statistiekenPane = new StatistiekenPane();

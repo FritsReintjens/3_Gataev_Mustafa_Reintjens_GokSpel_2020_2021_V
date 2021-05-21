@@ -17,8 +17,10 @@ public class GokSpelMain extends Application {
 	public void start(Stage primaryStage) throws IOException, BiffException {
 		Spel facadeSpel = new Spel();
 		AdminViewController adminController = new AdminViewController(facadeSpel);
-		AdminView adminView = new AdminView(adminController);
 		GamblerViewController gamblerViewController = new GamblerViewController(facadeSpel);
+		SpelVerloopPaneController spelVerloopPaneController = new SpelVerloopPaneController(facadeSpel);
+		AdminView adminView = new AdminView(adminController, spelVerloopPaneController);
+
 		GamblerView gamblerView = new GamblerView(gamblerViewController);
 
 

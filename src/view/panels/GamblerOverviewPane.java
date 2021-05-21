@@ -1,5 +1,6 @@
 package view.panels;
 
+import controller.GamblerViewController;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.collections.FXCollections;
@@ -24,8 +25,10 @@ public class GamblerOverviewPane extends GridPane{
 	private SpelerDB spelerDB;
 	private TableView<Speler> table;
 	private ObservableList<Speler> spelers;
+	private GamblerViewController gamblerViewController;
 	
-	public GamblerOverviewPane() {
+	public GamblerOverviewPane(GamblerViewController gamblerViewController) {
+		this.gamblerViewController = gamblerViewController;
 		try {
 			this.spelerDB = new SpelerDB();
 		}catch (FileNotFoundException e) {
