@@ -27,7 +27,7 @@ public class GamblerView extends GridPane {
     private RadioButton rgs1,rgs2,rgs3;
     private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113;
     private VBox p0 ,p2 ,p3 ,p11 ,p12 ,p221 ,p222 ,p321 ,p322;
-    private int aantalWorpen;
+    private int aantalWorpen = 0;
 
     public GamblerView(GamblerViewController controller) {
 
@@ -208,11 +208,17 @@ public class GamblerView extends GridPane {
     }
 
     public void werpDobbelsteen(){
-        if (aantalWorpen > 0 && aantalWorpen <= 4){
-            Label temp =(Label) p321.getChildren().get(aantalWorpen-1);
-            temp.setText("test" + aantalWorpen);
-            temp.setVisible(true);
-        }
         aantalWorpen++;
+        if (aantalWorpen > 0 && aantalWorpen <= 4){
+            p321.setVisible(true);
+            Label temp =(Label) p321.getChildren().get(aantalWorpen-1);
+            temp.setText("Worp " + aantalWorpen + ": "  + (int)(Math.random()*6+1));
+            temp.setVisible(true);
+        } else if (aantalWorpen > 4){
+            p322.setVisible(true);
+        } else {
+            p321.setVisible(false);
+            p322.setVisible(false);
+        }
     }
 }
