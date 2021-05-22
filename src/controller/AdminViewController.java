@@ -9,6 +9,7 @@ public class AdminViewController implements Observer {
 
     public AdminViewController(Spel spel){
         this.spelFacade = spel;
+        spel.registerObserver(this);
     }
 
     @Override

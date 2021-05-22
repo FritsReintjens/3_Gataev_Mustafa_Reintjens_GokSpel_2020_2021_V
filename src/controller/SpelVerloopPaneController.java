@@ -6,20 +6,23 @@ import view.panels.SpelVerloopPane;
 
 public class SpelVerloopPaneController implements Observer {
     private SpelVerloopPane spelVerloopPane;
-    private Spel spel;
+    private Spel spelFacade;
 
     public SpelVerloopPaneController(Spel spel){
-        this.spel = spel;
-        this.spelVerloopPane = spelVerloopPane;
+        this.spelFacade = spel;
         spel.registerObserver(this);
     }
 
-    public void setView(SpelVerloopPane view) {
-        this.spelVerloopPane = view;
+    public void setView(SpelVerloopPane spelVerloopPane) {
+        this.spelVerloopPane = spelVerloopPane;
+    }
+
+    public Spel getSpelFacade() {
+        return spelFacade;
     }
 
     @Override
     public void update(){
-
+        spelVerloopPane.vulWaardenIn();
     }
 }

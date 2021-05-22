@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.layout.*;
 import model.Speler;
+import model.gokstrategy.GokStrategy;
+
 import java.util.Map;
 
 /**
@@ -17,17 +19,17 @@ import java.util.Map;
 public class GamblerView extends GridPane {
     private String gegevenSpelersNaam;
     private double gevondenSpelerGoksaldo;
+    private double inzet;
 
     private Stage stage = new Stage();
     private GamblerViewController controller;
 
-    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,w1Label,w2Label,w3Label,w4Label, resultLabel, nieuweGoksaldoLabel;
+    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel;
     private TextField spelerField, inzetField;
     private Button startButton,bevestigButton, werpButton;
     private RadioButton rgs1,rgs2,rgs3;
-    private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113;
+    private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113, p3211, p3212,p3213, p3214;
     private VBox p0 ,p2 ,p3 ,p11 ,p12 ,p221 ,p222 ,p321 ,p322;
-    private int aantalWorpen = 0;
 
     public GamblerView(GamblerViewController controller) {
 
@@ -76,12 +78,12 @@ public class GamblerView extends GridPane {
 
         this.p221 = new VBox(10);
         final ToggleGroup tGroup = new ToggleGroup();
-        this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een" + "even" +" getal");
+        this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een " + "even" +" getal");
         rgs1.setToggleGroup(tGroup);
         rgs1.setSelected(true);
-        this.rgs2 = new RadioButton("de som van de ogen van alle worpen samen is" + 21);
+        this.rgs2 = new RadioButton("de som van de ogen van alle worpen samen is " + 21);
         rgs2.setToggleGroup(tGroup);
-        this.rgs3 = new RadioButton("het aantal ogen is bij elke worp" + "hoger" + "dan bij de vorige worp");
+        this.rgs3 = new RadioButton("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp");
         rgs3.setToggleGroup(tGroup);
         p221.getChildren().addAll(rgs1, rgs2, rgs3);
         this.p222 = new VBox(10);
@@ -91,15 +93,28 @@ public class GamblerView extends GridPane {
         p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label);
 
         this.p321 = new VBox();
+        this.p3211 = new HBox();
+        this.p3212 = new HBox();
+        this.p3213 = new HBox();
+        this.p3214 = new HBox();
+
+
         this.w1Label = new Label("worp1 :");
         this.w2Label = new Label("worp2 :");
         this.w3Label = new Label("worp3 :");
         this.w4Label = new Label("worp4 :");
-        w1Label.setVisible(false);
-        w2Label.setVisible(false);
-        w3Label.setVisible(false);
-        w4Label.setVisible(false);
-        p321.getChildren().addAll(w1Label,w2Label,w3Label,w4Label);
+        this.w1resultLabel = new Label("");
+        this.w2resultLabel = new Label("");
+        this.w3resultLabel = new Label("");
+        this.w4resultLabel = new Label("");
+
+        p3211.getChildren().addAll(w1Label,w1resultLabel);
+        p3212.getChildren().addAll(w2Label,w2resultLabel);
+        p3213.getChildren().addAll(w3Label,w3resultLabel);
+        p3214.getChildren().addAll(w4Label,w4resultLabel);
+
+        p321.getChildren().addAll(p3211,p3212,p3213,p3214);
+        p321.setVisible(false);
 
 
         this.p322 = new VBox();
@@ -123,7 +138,7 @@ public class GamblerView extends GridPane {
         p22.getChildren().addAll(p221,p222);
         this.p23 = new HBox(10);
         this.bevestigButton = new Button("bevestig je keuze");
-        bevestigButton.setOnAction(event -> bevestigKeuze());
+        bevestigButton.setOnAction(event -> bevestigKeuze(((RadioButton)(tGroup.getSelectedToggle())).getText()));
         p23.getChildren().addAll(bevestigButton);
 
         this.p31 = new HBox(10);
@@ -183,6 +198,7 @@ public class GamblerView extends GridPane {
             if (!inzet.trim().isEmpty() && dInzet > 0 && this.gevondenSpelerGoksaldo >= dInzet) {
                 this.startButton.setDisable(false);
                 this.errorKader1.setVisible(false);
+                this.inzet = dInzet;
             } else {
                 this.startButton.setDisable(true);
                 this.errorKader1.setVisible(true);
@@ -204,21 +220,49 @@ public class GamblerView extends GridPane {
         this.p2.setVisible(true);
         this.inzetField.setDisable(true);
         this.spelerField.setDisable(true);
+        //HIER GEEF JE DE SPELER DOOR AAN DE FACADE
+
+        this.controller.getSpel().setSpeler(this.gegevenSpelersNaam);
+        this.controller.getSpel().setInzet(this.inzet);
+        this.controller.getSpel().startSpel();
+        this.startButton.setDisable(true);
     }
 
-    public void bevestigKeuze(){
+    public void bevestigKeuze(String strategy){
         this.p3.setVisible(true);
+        if (strategy.equalsIgnoreCase("de som van de ogen van alle worpen samen is 21")){
+            this.controller.getSpel().setEnumString("SOMOGEN");
+        }
+        else if(strategy.equalsIgnoreCase("Het aantal ogen bij elke worp is een even getal")){
+            this.controller.getSpel().setEnumString("EVENOGEN");
+        }
+        else{
+            this.controller.getSpel().setEnumString("WOPRENOPLOPEND");
+        }
+        this.controller.getSpel().bevestigKeuze();
+        this.bevestigButton.setDisable(true);
+        p321.setVisible(true);
     }
 
     public void werpDobbelsteen(){
-        aantalWorpen++;
-        if (aantalWorpen > 0 && aantalWorpen <= 4){
+        this.controller.getSpel().getState().werpDobbelsteen();
+        int aantalWorpen = this.controller.getAantalWorpen();
+        if (aantalWorpen >= 0 && aantalWorpen <= 3){
             p321.setVisible(true);
             p322.setVisible(false);
-            Label temp =(Label) p321.getChildren().get(aantalWorpen-1);
-            temp.setText("Worp " + aantalWorpen + ": "  + (int)(Math.random()*6+1));
-            temp.setVisible(true);
-        } else if (aantalWorpen > 4){
+            if(aantalWorpen == 0){
+                w1resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
+            }else if(aantalWorpen == 1){
+                w2resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
+            }
+            else if(aantalWorpen == 2){
+                w3resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
+            }
+            else{
+                w4resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
+            }
+
+        } else if (aantalWorpen > 3 ){
             p322.setVisible(true);
         } else {
             p321.setVisible(false);

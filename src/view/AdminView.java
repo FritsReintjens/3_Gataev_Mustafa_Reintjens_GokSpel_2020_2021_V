@@ -1,28 +1,24 @@
 package view;
 
-import controller.AdminViewController;
-import controller.SpelVerloopPaneController;
+import controller.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;	
+import javafx.stage.StageStyle;
+import view.panels.GamblerOverviewPane;
 
 public class AdminView {
 	private Stage stage = new Stage();
-	private AdminViewController adminViewController;
-	private SpelVerloopPaneController spelVerloopPaneController;
 		
-	public AdminView(AdminViewController adminViewController, SpelVerloopPaneController spelVerloopPaneController){
-		this.adminViewController = adminViewController;
-		this.spelVerloopPaneController = spelVerloopPaneController;
+	public AdminView(AdminViewController adminViewController, SpelVerloopPaneController spelVerloopPaneController, GamblerOverviewPaneController gamblerOverviewPaneController, StatistiekPaneController statistiekPaneController, InstellingenPaneController instellingenPaneController){
 		stage.setTitle("ADMIN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(630);
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 600, 600);
-		BorderPane borderPane = new AdminMainPane(adminViewController,spelVerloopPaneController);
+		BorderPane borderPane = new AdminMainPane(spelVerloopPaneController, gamblerOverviewPaneController, statistiekPaneController, instellingenPaneController);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
