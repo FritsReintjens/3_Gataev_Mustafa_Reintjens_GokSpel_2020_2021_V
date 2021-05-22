@@ -28,4 +28,14 @@ public class GewonnenState implements SpelState{
     public void verhoogInzet() {
         throw new IllegalStateException("Kan niet in huidige state");
     }
+
+    @Override
+    public void showVerloren(){
+            throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void showGewonnen(){
+        //
+    }
 }

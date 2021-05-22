@@ -21,6 +21,11 @@ public class GamblerOverviewPaneController implements Observer {
 
     @Override
     public void update() {
+        this.gamblerOverviewPane.refresh();
 
+    }
+
+    public void setView(GamblerOverviewPane gamblerOverviewPane) {
+        this.gamblerOverviewPane = gamblerOverviewPane;
     }
 }

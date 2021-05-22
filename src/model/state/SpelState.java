@@ -9,4 +9,6 @@ public interface SpelState {
     void bevestigKeuze();
     void werpDobbelsteen();
     void verhoogInzet();
+    void showVerloren();
+    void showGewonnen();
 }

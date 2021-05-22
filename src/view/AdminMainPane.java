@@ -21,8 +21,11 @@ public class AdminMainPane extends BorderPane {
                 SpelVerloopPane spelVerloopPane = new SpelVerloopPane(spelVerloopPaneController);
                 spelVerloopPaneController.setView(spelVerloopPane);
                 GamblerOverviewPane gamblerOverviewPane = new GamblerOverviewPane(gamblerOverviewPaneController);
+                gamblerOverviewPaneController.setView(gamblerOverviewPane);
                 StatistiekenPane statistiekenPane = new StatistiekenPane(statistiekPaneController);
+                statistiekPaneController.setView(statistiekenPane);
                 InstellingenPane instellingenPane = new InstellingenPane(instellingenPaneController);
+                instellingenPaneController.setView(instellingenPane);
 
                 Tab spelVerloopTab = new Tab("Spelverloop", spelVerloopPane);
                 Tab spelerTab = new Tab("Spelers",gamblerOverviewPane);
@@ -33,6 +36,7 @@ public class AdminMainPane extends BorderPane {
                 tabPane.getTabs().add(spelerTab);
                 tabPane.getTabs().add(statistiekTab);
                 tabPane.getTabs().add(instellingTab);
+
 
                 this.setCenter(tabPane);
         }

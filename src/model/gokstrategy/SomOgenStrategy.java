@@ -7,8 +7,7 @@ import java.util.ArrayList;
  */
 
 public class SomOgenStrategy implements GokStrategy{
-    private int winstFactor = 5, aantalOgen = 21, som = 0;
-    private ArrayList<Integer> worpen = new ArrayList<>();
+    private int winstFactor = 5, aantalOgen = 21, som = 0, counter = 0;
 
     @Override
     public String beschrijving(){
@@ -22,11 +21,11 @@ public class SomOgenStrategy implements GokStrategy{
 
     @Override
     public boolean kanWinnen(int aantalOgen){
-        worpen.add(aantalOgen);
+        counter ++;
         som += aantalOgen;
-        if (worpen.size() < 4)
+        if (counter < 4)
             return som < 21;
-        if (worpen.size() == 4)
+        if (counter == 4)
             return som == 21;
         return false;
     }

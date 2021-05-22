@@ -41,12 +41,12 @@ public class GamblerView extends GridPane {
         stage.setX(20);
         stage.setY(20);
 
-		Scene scene = new Scene(root, 600, 600);
-		stage.setScene(scene);
-		stage.sizeToScene();
-		stage.show();
+        Scene scene = new Scene(root, 600, 600);
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.show();
 
-		controller.setView(this);
+        controller.setView(this);
 
     }
 
@@ -122,7 +122,6 @@ public class GamblerView extends GridPane {
         this.nieuweGoksaldoLabel = new Label("enter nieuwe goksaldo hier");
         p322.getChildren().addAll(resultLabel, nieuweGoksaldoLabel);
         p322.setVisible(false);
-
 
         this.p11 = new VBox(10);
         p11.getChildren().addAll(p111,p112,p113);
@@ -241,32 +240,28 @@ public class GamblerView extends GridPane {
         }
         this.controller.getSpel().bevestigKeuze();
         this.bevestigButton.setDisable(true);
-        p321.setVisible(true);
     }
 
     public void werpDobbelsteen(){
         this.controller.getSpel().getState().werpDobbelsteen();
-        int aantalWorpen = this.controller.getAantalWorpen();
-        if (aantalWorpen >= 0 && aantalWorpen <= 3){
-            p321.setVisible(true);
-            p322.setVisible(false);
-            if(aantalWorpen == 0){
-                w1resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
-            }else if(aantalWorpen == 1){
-                w2resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
-            }
-            else if(aantalWorpen == 2){
-                w3resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
-            }
-            else{
-                w4resultLabel.setText(Integer.toString(this.controller.gooiDobbelsteen()));
-            }
 
-        } else if (aantalWorpen > 3 ){
-            p322.setVisible(true);
-        } else {
-            p321.setVisible(false);
-            p322.setVisible(false);
+        int aantalWorpen = this.controller.getSpel().getAantalWorpen();
+        p321.setVisible(true);
+        if(aantalWorpen == 1){
+            w1resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[0]));
+        }else if(aantalWorpen == 2){
+            w2resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[1]));
         }
+        else if(aantalWorpen == 3){
+            w3resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[2]));
+        }
+        else{
+            w4resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[3]));
+        }
+
+    }
+
+    public void update(){
+        this.goksaldoLabel.setText("Je goksaldo is "+ this.controller.getSpel().getSpeler().getGoksaldo() + " €");
     }
 }

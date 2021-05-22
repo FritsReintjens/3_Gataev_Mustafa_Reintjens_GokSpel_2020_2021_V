@@ -24,8 +24,10 @@ public class Spel implements Observable {
     private SpelState spelState;
     private String enumString;
     private GokStrategy gokStrategy;
+    private int[] worpen;
+    private int aantalWorpen;
 
-    private Collection<Observer> observers = new ArrayList<>();
+private Collection<Observer> observers = new ArrayList<>();
 
     public Spel() throws BiffException, IOException {
         this.spelerDB = new SpelerDB();
@@ -51,7 +53,11 @@ public class Spel implements Observable {
     }
 
     public void setInzet(double inzet){
+        Double saldo = this.speler.getGoksaldo();
+        if (inzet > saldo)
+            throw new IllegalArgumentException("Inzet kan niet hoger zijn dan je goksaldo!");
         this.inzet = inzet;
+        this.speler.setGoksaldo(saldo - inzet);
     }
 
     public double getInzet(){
@@ -110,5 +116,36 @@ public class Spel implements Observable {
 
     public GokStrategy getGokStrategy(){
         return this.gokStrategy;
+    }
+
+    public int[] getWorpen() {
+        return worpen;
+    }
+
+    public void setWorpen(){
+        this.worpen = new int[4];
+    }
+
+    public int getAantalWorpen(){
+        return this.aantalWorpen;
+    }
+
+    public void setAantalWorpen(){
+        this.aantalWorpen = 0;
+    }
+
+    public boolean gooiDobbelsteen(){
+        int res = (int)(Math.random()*6+1);
+        worpen[aantalWorpen] = res;
+        aantalWorpen++;
+        return gokStrategy.kanWinnen(res);
+    }
+
+    public void verhoogAantalWorpen(){
+
+    }
+
+    public boolean gewonnen(){
+        return gokStrategy.kanWinnen(worpen[3]);
     }
 }

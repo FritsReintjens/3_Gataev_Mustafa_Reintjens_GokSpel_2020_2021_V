@@ -4,6 +4,7 @@ import model.Spel;
 
 public class SpeelState implements SpelState {
     Spel spel;
+    int aantalWorpen = 0;
 
     public SpeelState(Spel spel){
         this.spel = spel;
@@ -21,35 +22,44 @@ public class SpeelState implements SpelState {
 
     @Override
     public void werpDobbelsteen() {
-        //Zet de gokStrategy
+        //knop "werp dobbelsteen" aan, rest uit
+        if (spel.getAantalWorpen() == 0){
+            if (!this.spel.gooiDobbelsteen())
+                spel.changeState(new VerlorenState(spel));
+        }
 
-        //Gooi dobbelsteen
+        if (spel.getAantalWorpen() == 1){
+            if (!this.spel.gooiDobbelsteen())
+                spel.changeState(new VerlorenState(spel));
+        }
 
-        //Controleer verloren -> verloren : naar verloren state
+        if (spel.getAantalWorpen() == 2){
+            if (!this.spel.gooiDobbelsteen())
+                spel.changeState(new VerlorenState(spel));
+            //MOGELIJKHEID OM INZET TE VERHOGEN HIER
+        }
 
-        //Gooi dobbelsteen
-
-        //Controleer verloren -> verloren : naar verloren state
-        //                      -> wilt de speler inzet verhogen?
-
-        //Gooi dobbelsteen
-
-        //Controleer Verloren -> verloren : naar verloren state
-
-        //Gooi dobbelsteen
-
-        //Controleer verloren  -> verloren : naar verloren state
-        //                      -> gewonnen : naar gewonnen state
-
-
-        if (){}
-        spel.changeState(new GewonnenState(spel));
-
-
+        if (spel.getAantalWorpen() == 3) {
+            if (!this.spel.gooiDobbelsteen())
+                spel.changeState(new VerlorenState(spel));
+        }else{
+            spel.changeState(new GewonnenState(spel));
+        }
+        aantalWorpen++;
     }
 
     @Override
     public void verhoogInzet() {
+        throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void showVerloren(){
+        throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void showGewonnen(){
         throw new IllegalStateException("Kan niet in huidige state");
     }
 }

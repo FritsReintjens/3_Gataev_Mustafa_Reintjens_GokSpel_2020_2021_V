@@ -16,6 +16,8 @@ public class KiesGokStrategyState implements SpelState {
 
     @Override
     public void bevestigKeuze() {
+        //knop "bevestig je keuze" moet aanstaan, rest uit
+
         //code
         this.spel.setStrategy();
         spel.notifyObserver();
@@ -29,6 +31,16 @@ public class KiesGokStrategyState implements SpelState {
 
     @Override
     public void verhoogInzet() {
+        throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void showVerloren(){
+        throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void showGewonnen(){
         throw new IllegalStateException("Kan niet in huidige state");
     }
 }
