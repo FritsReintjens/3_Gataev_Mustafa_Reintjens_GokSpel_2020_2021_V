@@ -26,7 +26,7 @@ public class GamblerView extends GridPane {
 
     private Pane root;
     private Scene scene;
-    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,strategy4Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel, verhoogInzetLabel;
+    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, errorKader2, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,strategy4Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel, verhoogInzetLabel;
     private TextField spelerField, inzetField, verhoogInzetField;
     private Button startButton,bevestigButton, werpButton;
     private RadioButton rgs1,rgs2,rgs3,rgs4;
