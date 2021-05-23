@@ -123,12 +123,15 @@ public class GamblerView extends GridPane {
         this.w4resultLabel = new Label("");
         this.verhoogInzetLabel = new Label("Verhoog inzet met maximaal 10 €");
         this.verhoogInzetField = new TextField();
+        this.errorKader2 = new Label("Inzet moet van 0 € tot 10 € zijn");
+        this.errorKader2.setTextFill(Color.RED);
+        this.errorKader2.setVisible(false);
         this.verhoogInzetField.setOnAction(event -> verhoogInzet(verhoogInzetField.getText()));
         this.verhoogInzetLabel.setVisible(false);
         this.verhoogInzetField.setVisible(false);
 
         p3211.getChildren().addAll(w1Label,w1resultLabel);
-        p3212.getChildren().addAll(w2Label,w2resultLabel, verhoogInzetLabel, verhoogInzetField);
+        p3212.getChildren().addAll(w2Label,w2resultLabel, verhoogInzetLabel, verhoogInzetField, errorKader2);
         p3213.getChildren().addAll(w3Label,w3resultLabel);
         p3214.getChildren().addAll(w4Label,w4resultLabel);
         p321.getChildren().addAll(p3211,p3212,p3213,p3214);
@@ -321,13 +324,13 @@ public class GamblerView extends GridPane {
             double verhoogdeInzet = Double.parseDouble(text);
             this.controller.getSpel().setVerhoogdeInzet(verhoogdeInzet);
             this.controller.getSpel().verhoogInzet();
-
+            this.verhoogInzetField.setDisable(true);
+            this.verhoogInzetField.setVisible(false);
+            this.verhoogInzetLabel.setVisible(false);
+            this.errorKader2.setVisible(false);
         }catch (Exception e){
-            //TODO
+            this.errorKader2.setVisible(true);
         }
-        this.verhoogInzetField.setDisable(true);
-        this.verhoogInzetField.setVisible(false);
-        this.verhoogInzetLabel.setVisible(false);
     }
 
     public void update(){

@@ -88,7 +88,7 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void setVerhoogdeInzet(double inzet){
-        if (inzet > 10)
+        if (inzet > 10 || inzet <= 0)
             throw new IllegalArgumentException("Je mag je inzet met maximaal 10 euro verhogen.");
         Double saldo = this.speler.getGoksaldo();
         if (inzet > saldo)
