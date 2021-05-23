@@ -64,6 +64,9 @@ public class SpelVerloopPane extends GridPane {
         if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("KiesGokStrategyState")) {
             this.gokStrategyResult.setText(this.spelVerloopPaneController.getSpelFacade().getGokStrategy().getClass().getSimpleName());
         }
+        if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("VerhoogInzetState")){
+            this.inzetResult.setText(String.valueOf(this.spelVerloopPaneController.getSpelFacade().getInzet()+this.spelVerloopPaneController.getSpelFacade().getVerhoogdeInzet()));
+        }
     }
 
 

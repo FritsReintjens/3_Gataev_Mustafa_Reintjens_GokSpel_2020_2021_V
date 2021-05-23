@@ -47,29 +47,6 @@ public class SpeelState implements SpelState {
                 spel.notifyObserver();
                 break;
         }
-/*        if (spel.getAantalWorpen() == 0){
-            if (!this.spel.gooiDobbelsteen())
-                spel.changeState(new VerlorenState(spel));
-        }
-
-        if (spel.getAantalWorpen() == 1){
-            if (!this.spel.gooiDobbelsteen())
-                spel.changeState(new VerlorenState(spel));
-        }
-
-        if (spel.getAantalWorpen() == 2){
-            if (!this.spel.gooiDobbelsteen())
-                spel.changeState(new VerlorenState(spel));
-            //MOGELIJKHEID OM INZET TE VERHOGEN HIER
-        }
-
-        if (spel.getAantalWorpen() == 3) {
-            if (!this.spel.gooiDobbelsteen())
-                spel.changeState(new VerlorenState(spel));
-        }else{
-            spel.changeState(new GewonnenState(spel));
-        }
-        aantalWorpen++;*/
     }
 
     @Override

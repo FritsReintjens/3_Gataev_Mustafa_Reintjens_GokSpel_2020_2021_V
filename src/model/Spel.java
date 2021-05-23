@@ -21,6 +21,7 @@ public class Spel implements Observable {
     private int spelVolgNummer = 0;
     private Speler speler;
     private double inzet;
+    private double verhoogdeInzet;
     private SpelState spelState;
     private String enumString;
     private GokStrategy gokStrategy;
@@ -62,6 +63,20 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public double getInzet(){
         return this.inzet;
+    }
+
+    public void setVerhoogdeInzet(double inzet){
+        if (inzet > 10)
+            throw new IllegalArgumentException("Je mag je inzet met maximaal 10 euro verhogen.");
+        Double saldo = this.speler.getGoksaldo();
+        if (inzet > saldo)
+            throw new IllegalArgumentException("Inzet kan niet hoger zijn dan je goksaldo!");
+        this.verhoogdeInzet = inzet;
+        this.speler.setGoksaldo(saldo - inzet);
+    }
+
+    public double getVerhoogdeInzet(){
+        return this.verhoogdeInzet;
     }
 
     public int getSpelVolgNummer() {
@@ -146,6 +161,10 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public void verhoogAantalWorpen(){
 
+    }
+
+    public void verhoogInzet(){
+        this.getState().verhoogInzet();
     }
 
     public boolean gewonnen(){

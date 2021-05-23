@@ -28,8 +28,8 @@ public class GamblerView extends GridPane {
     private TextField spelerField, inzetField, verhoogInzetField;
     private Button startButton,bevestigButton, werpButton;
     private RadioButton rgs1,rgs2,rgs3;
-    private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113, p3211, p3212,p3213, p3214;
-    private VBox p0 ,p2 ,p3 ,p11 ,p12 ,p221 ,p222 ,p321 ,p322;
+    private HBox p1, p21, p22, p23, p31, p111, p112, p113, p3211, p3212,p3213, p3214, p3215;
+    private VBox p0 ,p2 ,p3 ,p11 ,p12,p32 ,p221 ,p222 ,p321 ,p322;
 
     public GamblerView(GamblerViewController controller) {
 
@@ -72,7 +72,6 @@ public class GamblerView extends GridPane {
         this.startButton = new Button("Start gokspel");
         this.startButton.setVisible(false);
         startButton.setOnAction(event -> startGokspel());
-        //startButton.setOnAction(event -> checkInput(spelerField.getText(), inzetField.getText()));
         p113.getChildren().addAll(startButton);
 
 
@@ -98,7 +97,6 @@ public class GamblerView extends GridPane {
         this.p3213 = new HBox();
         this.p3214 = new HBox();
 
-
         this.w1Label = new Label("worp1 :");
         this.w2Label = new Label("worp2 :");
         this.w3Label = new Label("worp3 :");
@@ -107,9 +105,14 @@ public class GamblerView extends GridPane {
         this.w2resultLabel = new Label("");
         this.w3resultLabel = new Label("");
         this.w4resultLabel = new Label("");
+        this.verhoogInzetLabel = new Label("Verhoog inzet met maximaal 10 €");
+        this.verhoogInzetField = new TextField();
+        this.verhoogInzetField.setOnAction(event -> verhoogInzet(verhoogInzetField.getText()));
+        this.verhoogInzetLabel.setVisible(false);
+        this.verhoogInzetField.setVisible(false);
 
         p3211.getChildren().addAll(w1Label,w1resultLabel);
-        p3212.getChildren().addAll(w2Label,w2resultLabel);
+        p3212.getChildren().addAll(w2Label,w2resultLabel, verhoogInzetLabel, verhoogInzetField);
         p3213.getChildren().addAll(w3Label,w3resultLabel);
         p3214.getChildren().addAll(w4Label,w4resultLabel);
         p321.getChildren().addAll(p3211,p3212,p3213,p3214);
@@ -117,8 +120,8 @@ public class GamblerView extends GridPane {
 
 
         this.p322 = new VBox();
-        this.resultLabel = new Label("enter resultaat hier");
-        this.nieuweGoksaldoLabel = new Label("enter nieuwe goksaldo hier");
+        this.resultLabel = new Label("");
+        this.nieuweGoksaldoLabel = new Label("");
         p322.getChildren().addAll(resultLabel, nieuweGoksaldoLabel);
         p322.setVisible(false);
 
@@ -143,7 +146,7 @@ public class GamblerView extends GridPane {
         this.werpButton = new Button("werp dobbelsteen");
         werpButton.setOnAction(event -> werpDobbelsteen());
         p31.getChildren().addAll(werpButton);
-        this.p32 = new HBox(10);
+        this.p32 = new VBox(10);
         p32.getChildren().addAll(p321,p322);
 
 
@@ -160,6 +163,7 @@ public class GamblerView extends GridPane {
 
         return this.p0;
     }
+
 
     public void checkNaamInput(String spelersNaam){
         Map<String,Speler> spelers = controller.getSpel().getSpelers();
@@ -259,10 +263,49 @@ public class GamblerView extends GridPane {
         else{
             w4resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[3]));
         }
+    }
 
+    private void verhoogInzet(String text) {
+        try {
+            double verhoogdeInzet = Double.parseDouble(text);
+            this.controller.getSpel().setVerhoogdeInzet(verhoogdeInzet);
+            this.controller.getSpel().verhoogInzet();
+
+        }catch (Exception e){
+            //TODO
+        }
+        this.verhoogInzetField.setDisable(true);
+        this.verhoogInzetField.setVisible(false);
+        this.verhoogInzetLabel.setVisible(false);
     }
 
     public void update(){
         this.goksaldoLabel.setText("Je goksaldo is "+ this.controller.getSpel().getSpeler().getGoksaldo() + " €");
+        System.out.println("update functie GAMBLERVIEW\tstate = " + this.controller.getSpel().getState().getClass().getSimpleName());
+        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+            System.out.println("HIERZOO");
+            this.resultLabel.setText("Helaas, je hebt verloren.");
+            this.resultLabel.setTextFill(Color.RED);
+            this.nieuweGoksaldoLabel.setText("Je nieuwe goksaldo is: " + this.controller.getSpel().getSpeler().getGoksaldo());
+            this.nieuweGoksaldoLabel.setTextFill(Color.RED);
+            this.werpButton.setDisable(true);
+            p322.setVisible(true);
+        }
+        if(this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+            this.resultLabel.setText("Gefeliciteerd, je hebt gewonnen!");
+            this.resultLabel.setTextFill(Color.GREEN);
+            this.nieuweGoksaldoLabel.setText("Je nieuwe goksaldo is: " + this.controller.getSpel().getSpeler().getGoksaldo());
+            this.nieuweGoksaldoLabel.setTextFill(Color.GREEN);
+            this.werpButton.setDisable(true);
+            p322.setVisible(true);
+        }
+        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerhoogInzetState")){
+            this.verhoogInzetLabel.setVisible(true);
+            this.verhoogInzetField.setVisible(true);
+        }
+        if (!this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerhoogInzetState")){
+            this.verhoogInzetLabel.setVisible(false);
+            this.verhoogInzetField.setVisible(false);
+        }
     }
 }
