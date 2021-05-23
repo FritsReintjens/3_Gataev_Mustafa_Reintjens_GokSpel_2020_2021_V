@@ -39,7 +39,7 @@ public class SpelerExcelLoadSaveStrategy implements LoadSaveStrategy{
 
     @Override
     public void save(String filename, HashMap lijst) throws WriteException, IOException, BiffException {
-        File f = new File("src/bestanden"+filename+".xls");
+        File f = new File("src/bestanden/"+filename+".xls");
 
         Collection<Speler> values = lijst.values();
         ArrayList<Speler> listOfPlayers = new ArrayList<>(values);

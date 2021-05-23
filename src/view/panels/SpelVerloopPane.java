@@ -102,8 +102,6 @@ public class SpelVerloopPane extends GridPane {
     }
     public void vulWaardenIn(){
         this.spelVolgNummerResult.setText(Integer.toString((this.spelVerloopPaneController.getSpelFacade().getSpelVolgNummer())));
-        System.out.println(this.spelVerloopPaneController.getSpelFacade().getState());
-        System.out.println(this.spelVerloopPaneController.getSpelFacade().getSpeler().getSpelersnaam());
         this.spelerNaamResult.setText(this.spelVerloopPaneController.getSpelFacade().getSpeler().getSpelersnaam());
         this.inzetResult.setText(String.valueOf(this.spelVerloopPaneController.getSpelFacade().getInzet()));
         if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("KiesGokStrategyState")) {

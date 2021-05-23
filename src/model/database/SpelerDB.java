@@ -19,8 +19,7 @@ public class SpelerDB {
     private Map<String, Speler> spelers;
     private LoadSaveStrategy loadSaveStrategy;
 
-
-    public SpelerDB() throws IOException, BiffException {
+    public SpelerDB(String loadSaveStratgy) throws IOException, BiffException {
         LoadSaveFactory factory = LoadSaveFactory.getInstance();
         loadSaveStrategy = factory.createLoadSaveStrategy(loadSaveStratgy);
         this.spelers = loadSaveStrategy.load("speler");

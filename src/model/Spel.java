@@ -31,6 +31,7 @@ public class Spel implements Observable {
     private GokStrategy gokStrategy;
     private int[] worpen;
     private int aantalWorpen;
+    private String activeStrategies;
     private SpelSettings spelSettings;
 
 private Collection<Observer> observers = new ArrayList<>();
@@ -45,6 +46,13 @@ private Collection<Observer> observers = new ArrayList<>();
 
     }
 
+    public String getActiveStrategies() {
+        return activeStrategies;
+    }
+
+    public void setActiveStrategies(){
+        this.activeStrategies = this.spelSettings.getSpelSetting("Strategies");
+    }
 
     public Map<String,Speler> getSpelers(){
         return spelerDB.getSpelers();
@@ -63,9 +71,7 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void setSpeler(String spelersnaam){
-        System.out.println(spelersnaam);
         Speler s = this.spelerDB.getSpelers().get(spelersnaam);
-        System.out.println(s.getSpelersnaam());
         this.speler = s;
     }
 
@@ -195,8 +201,6 @@ private Collection<Observer> observers = new ArrayList<>();
 
 
     public void updateStrategyGewonnen(){
-        System.out.println(this.gokStrategy.getClass().getSimpleName());
-        System.out.println(this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName()));
         StrategyData data = this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName());
         data.verhoogAantalGekozen();
         data.verhoogAantalGewonnen();
@@ -207,8 +211,6 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void updateStrategyVerloren(){
-        System.out.println(this.gokStrategy.getClass().getSimpleName());
-        System.out.println(this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName()));
         StrategyData data = this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName());
         data.verhoogAantalGekozen();
         data.verhoogInzet(this.inzet + this.verhoogdeInzet);

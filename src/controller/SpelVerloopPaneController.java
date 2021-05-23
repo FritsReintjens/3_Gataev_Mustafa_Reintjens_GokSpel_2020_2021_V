@@ -29,6 +29,7 @@ public class SpelVerloopPaneController implements Observer {
         this.spelFacade.notifyObserver();
         this.spelFacade.changeState(new WachtVoorInputState(this.spelFacade));
         this.spelFacade.resetFacade();
+
     }
 
     @Override

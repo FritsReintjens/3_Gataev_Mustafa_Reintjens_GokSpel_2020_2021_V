@@ -1,6 +1,7 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class SpelSettings {
@@ -12,7 +13,7 @@ public class SpelSettings {
 
     public void loadSpelSetting(){
         try{
-            InputStream is = new FileInputStream("src/bestanden/spelsettings.properties";
+            InputStream is = new FileInputStream("src/bestanden/spelsettings.properties");
             properties.load(is);
             is.close();
         } catch(IOException e){
@@ -41,4 +42,5 @@ public class SpelSettings {
     public void setGokStrategiesProperty(String strategies){
         properties.setProperty("Strategies", strategies);
     }
+
 }

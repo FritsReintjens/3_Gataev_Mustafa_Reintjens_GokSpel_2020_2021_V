@@ -30,6 +30,8 @@ public class InstellingenPaneController implements Observer {
     public void setSettingToProperty(String format, String strategies){
         this.spelFacade.getSpelSettings().setFormatProperty(format);
         this.spelFacade.getSpelSettings().setGokStrategiesProperty(strategies);
+        this.spelFacade.getSpelSettings().storeSpelSettings();
+        this.spelFacade.setActiveStrategies();
     }
 
     public void spelerDBFormat(String format) throws BiffException, IOException {

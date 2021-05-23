@@ -88,8 +88,17 @@ public class InstellingenPane extends GridPane {
         this.add(p0,0,1);
     }
 
-    private void setSettings(String format, boolean strat1, boolean strat2, boolean strat3, boolean strat4) {
+    private void setSettings(String format, boolean strat1, boolean strat2, boolean strat3, boolean strat4) throws BiffException, IOException {
+        String strategies = "";
 
-        System.out.println(strategies);
+        strategies += (strat1)?gokStrategy1.getText() + ",":"";
+        strategies += (strat2)?gokStrategy2.getText() + ",":"";
+        strategies += (strat3)?gokStrategy3.getText() + ",":"";
+        strategies += (strat4)?gokStrategy4.getText() + ",":"";
+
+        if (strategies.length() > 0)strategies = strategies.substring(0, strategies.length()-1);
+
+        this.instellingenPaneController.setSettingToProperty(format,strategies);
+        this.instellingenPaneController.spelerDBFormat(format);
     }
 }

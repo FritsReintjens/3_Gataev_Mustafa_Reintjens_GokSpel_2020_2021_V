@@ -182,7 +182,6 @@ public class GamblerView extends GridPane {
 
 
     public void checkNaamInput(String spelersNaam){
-        System.out.println(this.controller.getSpel().getState());
         Map<String,Speler> spelers = controller.getSpel().getSpelers();
         double tijdelijkeGoksaldo;
 
@@ -236,16 +235,26 @@ public class GamblerView extends GridPane {
     }
 
     public void startGokspel(){
-        System.out.println("GAMBLERVIEW - begin startGokspel() speler=" + this.controller.getSpel().getSpeler());
         this.p2.setVisible(true);
         this.inzetField.setDisable(true);
         this.spelerField.setDisable(true);
         //HIER GEEF JE DE SPELER DOOR AAN DE FACADE
         this.controller.getSpel().setSpeler(this.gegevenSpelersNaam);
         this.controller.getSpel().setInzet(this.inzet);
+        if (controller.getSpel().getActiveStrategies().contains("EvenOgenStrategy")) {
+            rgs1.setVisible(true);
+        }
+        if (controller.getSpel().getActiveStrategies().contains("SomOgenStrategy")) {
+            rgs2.setVisible(true);
+        }
+        if (controller.getSpel().getActiveStrategies().contains("WorpenOplopendStrategy")) {
+            rgs3.setVisible(true);
+        }
+        if (controller.getSpel().getActiveStrategies().contains("WinStrategy")) {
+            rgs4.setVisible(true);
+        }
         this.controller.getSpel().startSpel();
         this.startButton.setDisable(true);
-        System.out.println("GAMBLERVIEW - startGo eindekspel() speler=" + this.controller.getSpel().getSpeler());
     }
 
     public void bevestigKeuze(String strategy){
@@ -362,10 +371,7 @@ public class GamblerView extends GridPane {
         stage.show();
 
         controller.setView(this);
-//        this.verhoogInzetLabel.setVisible(false);
-//        this.verhoogInzetField.setVisible(false);
-//        this.spelerField.setDisable(false);
-//        this.spelerField.setText("");
+
     }
 }
 
