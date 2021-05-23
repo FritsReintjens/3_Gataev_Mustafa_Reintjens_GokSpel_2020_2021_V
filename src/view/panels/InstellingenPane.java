@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jxl.read.biff.BiffException;
 import model.gokstrategy.GokStrategyFactory;
 
 import java.awt.*;
+import java.io.IOException;
 import java.lang.invoke.LambdaConversionException;
 
 /**
@@ -41,10 +43,10 @@ public class InstellingenPane extends GridPane {
 
         this.p12 = new VBox(10);
         final ToggleGroup tGroup = new ToggleGroup();
-        this.textButton = new RadioButton("text");
+        this.textButton = new RadioButton("TEKST");
         textButton.setToggleGroup(tGroup);
         textButton.setSelected(true);
-        this.excelButton = new RadioButton("excel");
+        this.excelButton = new RadioButton("EXCEL");
         excelButton.setToggleGroup(tGroup);
         p12.getChildren().addAll(textButton, excelButton);
 
@@ -53,15 +55,23 @@ public class InstellingenPane extends GridPane {
         p21.getChildren().addAll(selectGokStrategyLabel);
 
         this.p22 = new VBox(10);
-        this.gokStrategy1 = new CheckBox("1");
-        this.gokStrategy2 = new CheckBox("2");
-        this.gokStrategy3 = new CheckBox("3");
-        this.gokStrategy4 = new CheckBox("4");
+        this.gokStrategy1 = new CheckBox("EvenOgenStrategy");
+        this.gokStrategy2 = new CheckBox("SomOgenStrategy");
+        this.gokStrategy3 = new CheckBox("WorpenOplopendStrategy");
+        this.gokStrategy4 = new CheckBox("WinStrategy");
         p22.getChildren().addAll(gokStrategy1, gokStrategy2, gokStrategy3, gokStrategy4);
 
         this.p31 = new VBox(10);
         this.saveButton = new Button("Save");
-        saveButton.setOnAction(event -> setSettings(((RadioButton)(tGroup.getSelectedToggle())).getText(), gokStrategy1.isSelected(), gokStrategy2.isSelected(), gokStrategy3.isSelected(), gokStrategy4.isSelected()));
+        saveButton.setOnAction(event -> {
+            try {
+                setSettings(((RadioButton)(tGroup.getSelectedToggle())).getText(), gokStrategy1.isSelected(), gokStrategy2.isSelected(), gokStrategy3.isSelected(), gokStrategy4.isSelected());
+            } catch (BiffException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         p31.getChildren().addAll(saveButton);
 
         this.p1 = new HBox(10);

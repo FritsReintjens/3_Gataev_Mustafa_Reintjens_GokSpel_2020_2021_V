@@ -23,7 +23,7 @@ public class SpelSettings {
     public void storeSpelSettings(){
         try {
             FileOutputStream os = new FileOutputStream("src/bestanden/spelsettings.properties");
-            properties.store(os, "Wat gebeurd er als ik hier een string zet?");
+            properties.store(os, "");
             os.close();
         }catch (Exception e){
             e.printStackTrace();

@@ -79,15 +79,25 @@ public class GamblerView extends GridPane {
 
         this.p221 = new VBox(10);
         final ToggleGroup tGroup = new ToggleGroup();
-        this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een " + "even" +" getal");
+
+        this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een " + "even" + " getal");
         rgs1.setToggleGroup(tGroup);
         rgs1.setSelected(true);
+        rgs1.setVisible(false);
+
+
         this.rgs2 = new RadioButton("de som van de ogen van alle worpen samen is " + 21);
         rgs2.setToggleGroup(tGroup);
+        rgs2.setVisible(false);
+
         this.rgs3 = new RadioButton("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp");
         rgs3.setToggleGroup(tGroup);
+        rgs3.setVisible(false);
+
         this.rgs4 = new RadioButton("win");
         rgs4.setToggleGroup(tGroup);
+        rgs4.setVisible(false);
+
 
         p221.getChildren().addAll(rgs1, rgs2, rgs3,rgs4);
         this.p222 = new VBox(10);
@@ -313,7 +323,6 @@ public class GamblerView extends GridPane {
 
     public void update(){
         this.goksaldoLabel.setText("Je goksaldo is "+ this.controller.getSpel().getSpeler().getGoksaldo() + " €");
-
         if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
             this.resultLabel.setText("Helaas, je hebt verloren.");
             this.resultLabel.setTextFill(Color.RED);
@@ -359,3 +368,5 @@ public class GamblerView extends GridPane {
 //        this.spelerField.setText("");
     }
 }
+
+

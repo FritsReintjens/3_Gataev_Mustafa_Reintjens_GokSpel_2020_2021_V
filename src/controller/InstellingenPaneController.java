@@ -1,8 +1,13 @@
 package controller;
 
+import jxl.read.biff.BiffException;
 import model.Spel;
+import model.database.SpelerDB;
 import model.observer.Observer;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import view.panels.InstellingenPane;
+
+import java.io.IOException;
 
 public class InstellingenPaneController implements Observer {
     private Spel spelFacade;
@@ -25,5 +30,9 @@ public class InstellingenPaneController implements Observer {
     public void setSettingToProperty(String format, String strategies){
         this.spelFacade.getSpelSettings().setFormatProperty(format);
         this.spelFacade.getSpelSettings().setGokStrategiesProperty(strategies);
+    }
+
+    public void spelerDBFormat(String format) throws BiffException, IOException {
+        this.spelFacade.getSpelerDB().setLoadSaveStrategy(format);
     }
 }

@@ -22,9 +22,7 @@ public class SpelerDB {
 
     public SpelerDB() throws IOException, BiffException {
         LoadSaveFactory factory = LoadSaveFactory.getInstance();
-        //TODO
-        //Parameter implementeren
-        loadSaveStrategy = factory.createLoadSaveStrategy("TEKST");
+        loadSaveStrategy = factory.createLoadSaveStrategy(loadSaveStratgy);
         this.spelers = loadSaveStrategy.load("speler");
     }
 
@@ -37,5 +35,11 @@ public class SpelerDB {
         loadSaveStrategy.save("speler", (HashMap) spelers);
     }
 
+    //ALS ER IN INSTELLINGENPANE EEN VERANDERING WORDT OPGESLAGEN MOET DEZE AANGESPROKEN WORDEN
+    public void setLoadSaveStrategy(String format) throws BiffException, IOException {
+        LoadSaveFactory factory = LoadSaveFactory.getInstance();
+        this.loadSaveStrategy = factory.createLoadSaveStrategy(format);
+        this.spelers = loadSaveStrategy.load("speler");
+    }
 
 }
