@@ -32,5 +32,4 @@ public class SpelerDB {
         return sorted;
     }
 
-    //Moet DB ook singleton?
 }

@@ -19,10 +19,13 @@ import java.util.Map;
 
 public class Spel implements Observable {
     private SpelerDB spelerDB;
+    private GokStrategyDB gokStrategyDB;
+    private StrategyData strategyData;
     private int spelVolgNummer = 0;
     private Speler speler;
     private double inzet;
     private double verhoogdeInzet;
+    private double winst;
     private SpelState spelState;
     private String enumString;
     private GokStrategy gokStrategy;
@@ -33,6 +36,7 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public Spel() throws BiffException, IOException {
         this.spelerDB = new SpelerDB();
+        this.gokStrategyDB = new GokStrategyDB();
         this.spelState = new WachtVoorInputState(this);
     }
 
@@ -43,6 +47,10 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public SpelerDB getSpelerDB(){
         return spelerDB;
+    }
+
+    public GokStrategyDB getGokStrategyDB() {
+        return gokStrategyDB;
     }
 
     public Speler getSpeler(){
@@ -151,25 +159,18 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public boolean gooiDobbelsteen(){
-        System.out.println("SPEL\tgooiDobbelsteen, aantal worpen = " + aantalWorpen);
         int res = (int)(Math.random()*6+1);
         worpen[aantalWorpen] = res;
         aantalWorpen++;
-        System.out.println("SPEL\tgooiDobbelsteen einde, aantal worpen = " + aantalWorpen);
-        System.out.println("SPEL\tgooiDobbelsteen einde, res = " + res);
         return gokStrategy.kanWinnen(res);
-    }
-
-    public void verhoogAantalWorpen(){
-
     }
 
     public void verhoogInzet(){
         this.getState().verhoogInzet();
     }
 
-    public boolean gewonnen(){
-        return gokStrategy.kanWinnen(worpen[3]);
+    public double getWinst(){
+        return this.winst;
     }
 
     public void setWinst(){

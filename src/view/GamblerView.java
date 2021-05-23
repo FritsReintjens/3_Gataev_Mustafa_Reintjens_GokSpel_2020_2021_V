@@ -246,22 +246,44 @@ public class GamblerView extends GridPane {
     }
 
     public void werpDobbelsteen(){
-        System.out.println("GAMBLERVIEW\tDruk op knop, aantal worpen = " + this.controller.getSpel().getAantalWorpen());
         this.controller.getSpel().getState().werpDobbelsteen();
-        System.out.println("GAMBLERVIEW\twerpDobbelsteen uitgevoerd, aantal worpen = " + this.controller.getSpel().getAantalWorpen());
 
         int aantalWorpen = this.controller.getSpel().getAantalWorpen();
         p321.setVisible(true);
         if(aantalWorpen == 1){
             w1resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[0]));
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+                this.controller.getSpel().showGewonnen();
+            }
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+                this.controller.getSpel().showVerloren();
+            }
         }else if(aantalWorpen == 2){
             w2resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[1]));
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+                this.controller.getSpel().showGewonnen();
+            }
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+                this.controller.getSpel().showVerloren();
+            }
         }
         else if(aantalWorpen == 3){
             w3resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[2]));
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+                this.controller.getSpel().showGewonnen();
+            }
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+                this.controller.getSpel().showVerloren();
+            }
         }
         else{
             w4resultLabel.setText(Integer.toString(this.controller.getSpel().getWorpen()[3]));
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+                this.controller.getSpel().showGewonnen();
+            }
+            if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+                this.controller.getSpel().showVerloren();
+            }
         }
     }
 
@@ -281,9 +303,7 @@ public class GamblerView extends GridPane {
 
     public void update(){
         this.goksaldoLabel.setText("Je goksaldo is "+ this.controller.getSpel().getSpeler().getGoksaldo() + " €");
-        System.out.println("update functie GAMBLERVIEW\tstate = " + this.controller.getSpel().getState().getClass().getSimpleName());
         if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
-            System.out.println("HIERZOO");
             this.resultLabel.setText("Helaas, je hebt verloren.");
             this.resultLabel.setTextFill(Color.RED);
             this.nieuweGoksaldoLabel.setText("Je nieuwe goksaldo is: " + this.controller.getSpel().getSpeler().getGoksaldo());

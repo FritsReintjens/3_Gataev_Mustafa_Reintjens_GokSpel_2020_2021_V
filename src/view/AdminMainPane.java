@@ -29,7 +29,7 @@ public class AdminMainPane extends BorderPane {
 
                 Tab spelVerloopTab = new Tab("Spelverloop", spelVerloopPane);
                 Tab spelerTab = new Tab("Spelers",gamblerOverviewPane);
-                Tab statistiekTab = new Tab("Staitieken", statistiekenPane);
+                Tab statistiekTab = new Tab("Statistieken", statistiekenPane);
                 Tab instellingTab = new Tab("Instellingen", instellingenPane);
 
                 tabPane.getTabs().add(spelVerloopTab);

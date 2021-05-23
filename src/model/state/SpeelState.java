@@ -26,7 +26,6 @@ public class SpeelState implements SpelState {
 
         boolean res = true;
 
-        System.out.println("SPEELSTATE\twerpDobbelsteen wordt opgeroepen, aantal worpen = " + spel.getAantalWorpen());
         switch (spel.getAantalWorpen()){
             case 0:
             case 2:

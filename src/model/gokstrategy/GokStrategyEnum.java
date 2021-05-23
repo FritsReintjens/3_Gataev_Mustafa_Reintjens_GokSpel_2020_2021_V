@@ -18,4 +18,7 @@ public enum GokStrategyEnum {
     public String getKlassenaam(){
         return klassenaam;
     }
+    public String getKlassenaamSimpel(){
+        return klassenaamSimpel;
+    }
 }

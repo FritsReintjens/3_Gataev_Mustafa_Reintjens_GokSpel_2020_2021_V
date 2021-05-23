@@ -13,12 +13,18 @@ public class StatistiekPaneController implements Observer {
         spel.registerObserver(this);
     }
 
-    @Override
-    public void update() {
-
-    }
-
     public void setView(StatistiekenPane statistiekenPane) {
         this.statistiekenPane = statistiekenPane;
     }
+
+    public Spel getSpelFacade(){
+        return this.spelFacade;
+    }
+
+    @Override
+    public void update() {
+        this.statistiekenPane.update();
+    }
+
+
 }

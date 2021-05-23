@@ -32,6 +32,11 @@ public class VerlorenState implements SpelState {
     @Override
     public void showVerloren(){
         //Tegen controller zeggen laat de verloren box zien
+        this.spel.updateStrategyVerloren();
+        this.spel.notifyObserver();
+
+        //In Spelverloop moet een knop zichtbaar worden om een nieuw spel te starten, of sessie te beeindigen
+
     }
 
     @Override
