@@ -21,4 +21,9 @@ public class InstellingenPaneController implements Observer {
     public void update() {
 
     }
+
+    public void setSettingToProperty(String format, String strategies){
+        this.spelFacade.getSpelSettings().setFormatProperty(format);
+        this.spelFacade.getSpelSettings().setGokStrategiesProperty(strategies);
+    }
 }

@@ -31,6 +31,7 @@ public class Spel implements Observable {
     private GokStrategy gokStrategy;
     private int[] worpen;
     private int aantalWorpen;
+    private SpelSettings spelSettings;
 
 private Collection<Observer> observers = new ArrayList<>();
 
@@ -39,6 +40,7 @@ private Collection<Observer> observers = new ArrayList<>();
         this.gokStrategyDB = new GokStrategyDB();
         this.spelState = new WachtVoorInputState(this);
         this.spelVolgNummer = spelVolgNummer;
+        this.spelSettings = new SpelSettings();
     }
 
 
@@ -222,5 +224,10 @@ private Collection<Observer> observers = new ArrayList<>();
         this.winst = 0.0;
         this.worpen = new int[4];
         this.aantalWorpen = 0;
+    }
+
+
+    public SpelSettings getSpelSettings() {
+        return spelSettings;
     }
 }
