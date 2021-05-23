@@ -31,7 +31,7 @@ public class VerlorenState implements SpelState {
 
     @Override
     public void showVerloren(){
-        //
+        //Tegen controller zeggen laat de verloren box zien
     }
 
     @Override

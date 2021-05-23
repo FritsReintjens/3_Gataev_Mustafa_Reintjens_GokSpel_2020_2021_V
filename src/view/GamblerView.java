@@ -24,8 +24,8 @@ public class GamblerView extends GridPane {
     private Stage stage = new Stage();
     private GamblerViewController controller;
 
-    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel;
-    private TextField spelerField, inzetField;
+    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel, verhoogInzetLabel;
+    private TextField spelerField, inzetField, verhoogInzetField;
     private Button startButton,bevestigButton, werpButton;
     private RadioButton rgs1,rgs2,rgs3;
     private HBox p1, p21, p22, p23, p31, p32, p111, p112, p113, p3211, p3212,p3213, p3214;
@@ -112,7 +112,6 @@ public class GamblerView extends GridPane {
         p3212.getChildren().addAll(w2Label,w2resultLabel);
         p3213.getChildren().addAll(w3Label,w3resultLabel);
         p3214.getChildren().addAll(w4Label,w4resultLabel);
-
         p321.getChildren().addAll(p3211,p3212,p3213,p3214);
         p321.setVisible(false);
 

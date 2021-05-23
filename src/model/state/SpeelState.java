@@ -29,15 +29,22 @@ public class SpeelState implements SpelState {
         System.out.println("SPEELSTATE\twerpDobbelsteen wordt opgeroepen, aantal worpen = " + spel.getAantalWorpen());
         switch (spel.getAantalWorpen()){
             case 0:
-            case 1:
             case 2:
                 res = this.spel.gooiDobbelsteen();
                 if (!res) spel.changeState(new VerlorenState(spel));
+                spel.notifyObserver();
                 break;
             case 3:
                 res = this.spel.gooiDobbelsteen();
                 if (!res) spel.changeState(new VerlorenState(spel));
                 if (res) spel.changeState(new GewonnenState(spel));
+                spel.notifyObserver();
+                break;
+            case 1:
+                res = this.spel.gooiDobbelsteen();
+                if (!res) spel.changeState(new VerlorenState(spel));
+                if (res) spel.changeState(new VerhoogInzetState(spel));
+                spel.notifyObserver();
                 break;
         }
 /*        if (spel.getAantalWorpen() == 0){

@@ -53,7 +53,6 @@ public class GamblerOverviewPane extends GridPane{
 
 		table.getColumns().addAll(kolFamilienaam, kolVoornaam, kolSpelersnaam, kolGoksaldo);
 
-		//Waarom kunnen we niet gewoon de refresh methode gebruiken, aangezien we daar al 'table.setItems(spelers)' doen?
 		spelers = FXCollections.observableArrayList(spelerDB.getSpelers().values());
 		table.setItems(spelers);
 		table.refresh();

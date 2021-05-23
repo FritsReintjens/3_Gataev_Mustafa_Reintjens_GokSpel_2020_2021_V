@@ -21,12 +21,19 @@ public class VerhoogInzetState implements SpelState{
 
     @Override
     public void werpDobbelsteen() {
-        throw new IllegalStateException("Kan niet in huidige state");
+        //hier moeten we de 3de worp doen EN state terug veranderen naar SpeelState EN nadat de derde worp is gegooid moet de label verhoog saldo en textinput weer verdwijnen
+        boolean res = true;
+        res = this.spel.gooiDobbelsteen();
+        //VERHOOGINZETINPUT DISABLE
+        if (!res) spel.changeState(new VerlorenState(spel));
+        if (res) spel.changeState(new SpeelState(spel));
+        spel.notifyObserver();
     }
 
     @Override
     public void verhoogInzet() {
-        throw new IllegalStateException("Kan niet in huidige state");
+        //hier moet view een label "verhoog saldo" en een textinput zichtbaar maken
+        spel.notifyObserver();
     }
 
     @Override
