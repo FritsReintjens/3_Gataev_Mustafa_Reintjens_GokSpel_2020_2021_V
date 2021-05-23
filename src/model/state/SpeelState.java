@@ -23,7 +23,24 @@ public class SpeelState implements SpelState {
     @Override
     public void werpDobbelsteen() {
         //knop "werp dobbelsteen" aan, rest uit
-        if (spel.getAantalWorpen() == 0){
+
+        boolean res = true;
+
+        System.out.println("SPEELSTATE\twerpDobbelsteen wordt opgeroepen, aantal worpen = " + spel.getAantalWorpen());
+        switch (spel.getAantalWorpen()){
+            case 0:
+            case 1:
+            case 2:
+                res = this.spel.gooiDobbelsteen();
+                if (!res) spel.changeState(new VerlorenState(spel));
+                break;
+            case 3:
+                res = this.spel.gooiDobbelsteen();
+                if (!res) spel.changeState(new VerlorenState(spel));
+                if (res) spel.changeState(new GewonnenState(spel));
+                break;
+        }
+/*        if (spel.getAantalWorpen() == 0){
             if (!this.spel.gooiDobbelsteen())
                 spel.changeState(new VerlorenState(spel));
         }
@@ -45,7 +62,7 @@ public class SpeelState implements SpelState {
         }else{
             spel.changeState(new GewonnenState(spel));
         }
-        aantalWorpen++;
+        aantalWorpen++;*/
     }
 
     @Override

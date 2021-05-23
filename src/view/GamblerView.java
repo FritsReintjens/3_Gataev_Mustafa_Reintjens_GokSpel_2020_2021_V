@@ -243,7 +243,9 @@ public class GamblerView extends GridPane {
     }
 
     public void werpDobbelsteen(){
+        System.out.println("GAMBLERVIEW\tDruk op knop, aantal worpen = " + this.controller.getSpel().getAantalWorpen());
         this.controller.getSpel().getState().werpDobbelsteen();
+        System.out.println("GAMBLERVIEW\twerpDobbelsteen uitgevoerd, aantal worpen = " + this.controller.getSpel().getAantalWorpen());
 
         int aantalWorpen = this.controller.getSpel().getAantalWorpen();
         p321.setVisible(true);

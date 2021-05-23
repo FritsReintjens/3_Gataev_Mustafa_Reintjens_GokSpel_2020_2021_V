@@ -135,9 +135,12 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public boolean gooiDobbelsteen(){
+        System.out.println("SPEL\tgooiDobbelsteen, aantal worpen = " + aantalWorpen);
         int res = (int)(Math.random()*6+1);
         worpen[aantalWorpen] = res;
         aantalWorpen++;
+        System.out.println("SPEL\tgooiDobbelsteen einde, aantal worpen = " + aantalWorpen);
+        System.out.println("SPEL\tgooiDobbelsteen einde, res = " + res);
         return gokStrategy.kanWinnen(res);
     }
 
