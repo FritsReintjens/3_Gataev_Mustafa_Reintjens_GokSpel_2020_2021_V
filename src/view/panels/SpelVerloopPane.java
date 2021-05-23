@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.Spel;
 
 import java.io.IOException;
@@ -71,13 +72,26 @@ public class SpelVerloopPane extends GridPane {
                 e.printStackTrace();
                 }
              });
+            startNieuwButton.setVisible(false);
 
             //KNOP beeindig sessie / Enkel zichtbaar in gewonnen of verloren state
             this.stopSessieButton = new Button("Stop sessie");
 
-            stopSessieButton.setOnAction(event -> stopSessie());
+            stopSessieButton.setOnAction(event -> {
+                try {
+                    stopSessie();
+                } catch (BiffException e) {
+                    e.printStackTrace();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            stopSessieButton.setVisible(false);
 
-            p15.getChildren().addAll(startNieuwButton, stopSessieButton);
+
+        p15.getChildren().addAll(startNieuwButton, stopSessieButton);
 
             this.p1 = new VBox(10);
             this.p1.getChildren().addAll(p11, p12, p13, p14, p15);
@@ -85,10 +99,11 @@ public class SpelVerloopPane extends GridPane {
             this.add(p1, 0, 1);
 
 
-
     }
     public void vulWaardenIn(){
         this.spelVolgNummerResult.setText(Integer.toString((this.spelVerloopPaneController.getSpelFacade().getSpelVolgNummer())));
+        System.out.println(this.spelVerloopPaneController.getSpelFacade().getState());
+        System.out.println(this.spelVerloopPaneController.getSpelFacade().getSpeler().getSpelersnaam());
         this.spelerNaamResult.setText(this.spelVerloopPaneController.getSpelFacade().getSpeler().getSpelersnaam());
         this.inzetResult.setText(String.valueOf(this.spelVerloopPaneController.getSpelFacade().getInzet()));
         if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("KiesGokStrategyState")) {
@@ -97,15 +112,27 @@ public class SpelVerloopPane extends GridPane {
         if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("VerhoogInzetState")){
             this.inzetResult.setText(String.valueOf(this.spelVerloopPaneController.getSpelFacade().getInzet()+this.spelVerloopPaneController.getSpelFacade().getVerhoogdeInzet()));
         }
+        if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("GewonnenState") || this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("VerlorenState")){
+            this.startNieuwButton.setDisable(false);
+            this.startNieuwButton.setVisible(true);
+            this.stopSessieButton.setDisable(false);
+            this.stopSessieButton.setVisible(true);
+        }
+
     }
 
     public void startNieuwSpel() throws IOException, BiffException {
         //Nieuw spel object met verhoogd volgnummer, alle parameters terug naar initial waarde, GamblerView resetten
         this.spelVerloopPaneController.startNieuwSpel();
+        this.startNieuwButton.setDisable(true);
+        this.startNieuwButton.setVisible(false);
+        this.stopSessieButton.setDisable(true);
+        this.stopSessieButton.setVisible(false);
     }
-
-    public void stopSessie(){
+    public void stopSessie() throws BiffException, WriteException, IOException {
         //Save spelergegevens naar bestand
+        this.spelVerloopPaneController.getSpelFacade().getSpelerDB().save();
+        System.exit(0);
     }
 
 

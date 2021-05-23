@@ -59,7 +59,9 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void setSpeler(String spelersnaam){
+        System.out.println(spelersnaam);
         Speler s = this.spelerDB.getSpelers().get(spelersnaam);
+        System.out.println(s.getSpelersnaam());
         this.speler = s;
     }
 
@@ -175,7 +177,8 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void setWinst(){
-        this.gokStrategy.getWinst(this.inzet+this.verhoogdeInzet);
+        this.winst = this.gokStrategy.getWinst(this.inzet+this.verhoogdeInzet);
+        this.speler.voegWinstToe(winst);
     }
 
     public void showGewonnen(){
@@ -210,5 +213,14 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public void resetGame() {
         this.getState().resetGame();
+    }
+
+    public void resetFacade() {
+        this.speler = null;
+        this.inzet = 0.0;
+        this.verhoogdeInzet = 0.0;
+        this.winst = 0.0;
+        this.worpen = new int[4];
+        this.aantalWorpen = 0;
     }
 }

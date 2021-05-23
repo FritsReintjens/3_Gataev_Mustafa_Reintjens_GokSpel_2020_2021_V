@@ -28,7 +28,7 @@ public class SpelVerloopPaneController implements Observer {
     public void startNieuwSpel() throws IOException, BiffException {
         this.spelFacade.notifyObserver();
         this.spelFacade.changeState(new WachtVoorInputState(this.spelFacade));
-        this.spelFacade = new Spel(this.spelFacade.getSpelVolgNummer());
+        this.spelFacade.resetFacade();
     }
 
     @Override

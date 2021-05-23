@@ -1,6 +1,7 @@
 package model.database;
 
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.database.loadSaveStrategy.LoadSaveFactory;
 import model.database.loadSaveStrategy.LoadSaveStrategy;
 import model.database.loadSaveStrategy.SpelerExcelLoadSaveStrategy;
@@ -31,5 +32,10 @@ public class SpelerDB {
         TreeMap<String, Speler> sorted = new TreeMap<>(this.spelers);
         return sorted;
     }
+
+    public void save() throws BiffException, WriteException, IOException {
+        loadSaveStrategy.save("speler", (HashMap) spelers);
+    }
+
 
 }

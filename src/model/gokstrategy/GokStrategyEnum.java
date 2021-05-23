@@ -4,7 +4,8 @@ package model.gokstrategy;
 public enum GokStrategyEnum {
     EVENOGEN("model.gokstrategy.EvenOgenStrategy", "EvenOgenStrategy"),
     SOMOGEN("model.gokstrategy.SomOgenStrategy", "SomOgenStrategy"),
-    WOPRENOPLOPEND("model.gokstrategy.WorpenOplopendStrategy", "WorpenOplopendStrategy");
+    WOPRENOPLOPEND("model.gokstrategy.WorpenOplopendStrategy", "WorpenOplopendStrategy"),
+    WIN("model.gokstrategy.WinStrategy", "WinStrategy");
 
 
     private final String klassenaam;

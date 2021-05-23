@@ -60,8 +60,14 @@ public class Speler /*implements Comparable<Speler>*/{
         this.goksaldo = goksaldo;
     }
 
+    public void voegWinstToe(double winst){
+        if (winst < 0)
+            throw new IllegalArgumentException("Goksaldo moet positief zijn.");
+        this.goksaldo += winst;
+    }
+
     public String toTextBestand(){
-        return getFamilienaam() + "," + getVoornaam() + "," + getSpelersnaam() + "," + getGoksaldo();
+        return getFamilienaam() + "," + getVoornaam() + "," + getSpelersnaam() + "," + getGoksaldo() + "\n";
     }
 
     @Override

@@ -24,16 +24,18 @@ public class GamblerView extends GridPane {
     private Stage stage = new Stage();
     private GamblerViewController controller;
 
-    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel, verhoogInzetLabel;
+    private Pane root;
+    private Scene scene;
+    private Label spelerLabel, goksaldoLabel, inzetLabel, errorKader1, kiesStrategyLabel, strategy1Label, strategy2Label, strategy3Label,strategy4Label,w1Label,w2Label,w3Label,w4Label,w1resultLabel, w2resultLabel, w3resultLabel, w4resultLabel, resultLabel, nieuweGoksaldoLabel, verhoogInzetLabel;
     private TextField spelerField, inzetField, verhoogInzetField;
     private Button startButton,bevestigButton, werpButton;
-    private RadioButton rgs1,rgs2,rgs3;
+    private RadioButton rgs1,rgs2,rgs3,rgs4;
     private HBox p1, p21, p22, p23, p31, p111, p112, p113, p3211, p3212,p3213, p3214, p3215;
     private VBox p0 ,p2 ,p3 ,p11 ,p12,p32 ,p221 ,p222 ,p321 ,p322;
 
     public GamblerView(GamblerViewController controller) {
 
-        Pane root = createNodeHierarchy();
+        this.root = createNodeHierarchy();
 
         this.controller = controller;
         stage.setTitle("GAMBLER VIEW");
@@ -41,7 +43,7 @@ public class GamblerView extends GridPane {
         stage.setX(20);
         stage.setY(20);
 
-        Scene scene = new Scene(root, 600, 600);
+        this.scene = new Scene(root, 600, 600);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
@@ -84,12 +86,16 @@ public class GamblerView extends GridPane {
         rgs2.setToggleGroup(tGroup);
         this.rgs3 = new RadioButton("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp");
         rgs3.setToggleGroup(tGroup);
-        p221.getChildren().addAll(rgs1, rgs2, rgs3);
+        this.rgs4 = new RadioButton("win");
+        rgs4.setToggleGroup(tGroup);
+
+        p221.getChildren().addAll(rgs1, rgs2, rgs3,rgs4);
         this.p222 = new VBox(10);
         this.strategy1Label = new Label("mogelijke winst is " + 4 + "x je inzet");
         this.strategy2Label = new Label("mogelijke winst is " + 5 + "x je inzet");
         this.strategy3Label = new Label("mogelijke winst is " + 10 + "x je inzet");
-        p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label);
+        this.strategy4Label = new Label("mogelijke winst is " + 10 + "x je inzet");
+        p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label, strategy4Label);
 
         this.p321 = new VBox();
         this.p3211 = new HBox();
@@ -166,6 +172,7 @@ public class GamblerView extends GridPane {
 
 
     public void checkNaamInput(String spelersNaam){
+        System.out.println(this.controller.getSpel().getState());
         Map<String,Speler> spelers = controller.getSpel().getSpelers();
         double tijdelijkeGoksaldo;
 
@@ -219,15 +226,16 @@ public class GamblerView extends GridPane {
     }
 
     public void startGokspel(){
+        System.out.println("GAMBLERVIEW - begin startGokspel() speler=" + this.controller.getSpel().getSpeler());
         this.p2.setVisible(true);
         this.inzetField.setDisable(true);
         this.spelerField.setDisable(true);
         //HIER GEEF JE DE SPELER DOOR AAN DE FACADE
-
         this.controller.getSpel().setSpeler(this.gegevenSpelersNaam);
         this.controller.getSpel().setInzet(this.inzet);
         this.controller.getSpel().startSpel();
         this.startButton.setDisable(true);
+        System.out.println("GAMBLERVIEW - startGo eindekspel() speler=" + this.controller.getSpel().getSpeler());
     }
 
     public void bevestigKeuze(String strategy){
@@ -238,8 +246,10 @@ public class GamblerView extends GridPane {
         else if(strategy.equalsIgnoreCase("Het aantal ogen bij elke worp is een even getal")){
             this.controller.getSpel().setEnumString("EVENOGEN");
         }
-        else{
+        else if(strategy.equalsIgnoreCase("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp")){
             this.controller.getSpel().setEnumString("WOPRENOPLOPEND");
+        } else {
+            this.controller.getSpel().setEnumString("WIN");
         }
         this.controller.getSpel().bevestigKeuze();
         this.bevestigButton.setDisable(true);
@@ -330,9 +340,22 @@ public class GamblerView extends GridPane {
         }
     }
     public void reset() {
-        this.verhoogInzetLabel.setVisible(false);
-        this.verhoogInzetField.setVisible(false);
-        this.spelerField.setDisable(false);
-        this.spelerField.setText("");
+        root.getChildren().clear();
+        this.root = createNodeHierarchy();
+        this.controller = controller;
+        stage.setTitle("GAMBLER VIEW");
+        stage.setX(20);
+        stage.setY(20);
+
+        this.scene = new Scene(root, 600, 600);
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.show();
+
+        controller.setView(this);
+//        this.verhoogInzetLabel.setVisible(false);
+//        this.verhoogInzetField.setVisible(false);
+//        this.spelerField.setDisable(false);
+//        this.spelerField.setText("");
     }
 }
