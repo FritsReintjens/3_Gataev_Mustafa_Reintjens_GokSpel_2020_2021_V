@@ -22,6 +22,7 @@ public class SpelVerloopPane extends GridPane {
     private VBox p1;
     private HBox p11,p12,p13,p14;
     private Label spelVolgNummer,spelerNaam, inzet, gokStrategy, spelVolgNummerResult, spelerNaamResult, inzetResult, gokStrategyResult;
+    private Button startNieuwButton, stopSessieButton;
 
     public SpelVerloopPane(SpelVerloopPaneController spelVerloopPaneController) {
         this.spelVerloopPaneController = spelVerloopPaneController;
@@ -55,6 +56,16 @@ public class SpelVerloopPane extends GridPane {
             this.p1.getChildren().addAll(p11, p12, p13, p14);
 
             this.add(p1, 0, 1);
+/*
+        //KNOP start nieuw spel / Enkel zichtbaar in gewonnen of verloren state
+            this.startNieuwButton = new Button("Start nieuw spel");
+
+            startNieuwButton.setOnAction(event -> );
+
+        //KNOP beeindig sessie / Enkel zichtbaar in gewonnen of verloren state
+            this.stopSessieButton = new Button("Stop sessie");
+
+            stopSessieButton.setOnAction();*/
 
     }
     public void vulWaardenIn(){
@@ -67,6 +78,14 @@ public class SpelVerloopPane extends GridPane {
         if (this.spelVerloopPaneController.getSpelFacade().getState().getClass().getSimpleName().equals("VerhoogInzetState")){
             this.inzetResult.setText(String.valueOf(this.spelVerloopPaneController.getSpelFacade().getInzet()+this.spelVerloopPaneController.getSpelFacade().getVerhoogdeInzet()));
         }
+    }
+
+    public void startNieuwSpel(){
+
+    }
+
+    public void stopSessie(){
+
     }
 
 

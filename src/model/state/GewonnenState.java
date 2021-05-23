@@ -36,6 +36,12 @@ public class GewonnenState implements SpelState{
 
     @Override
     public void showGewonnen(){
-        //
+        //Tegen controller zeggen laat de gewonnen box zien EN goksaldo verhogen
+        this.spel.setWinst();
+        this.spel.updateStrategyGewonnen();
+        this.spel.notifyObserver();
+
+
+        //In Spelverloop moet een knop zichtbaar worden om een nieuw spel te starten, of sessie te beeindigen
     }
 }
