@@ -2,10 +2,11 @@ package model.state;
 
 import model.Spel;
 
-public class GewonnenState implements SpelState{
-    Spel spel;
+public class GameResetState implements SpelState {
 
-    public GewonnenState(Spel spel){
+    private Spel spel;
+
+    public GameResetState(Spel spel) {
         this.spel = spel;
     }
 
@@ -30,25 +31,17 @@ public class GewonnenState implements SpelState{
     }
 
     @Override
-    public void showVerloren(){
-            throw new IllegalStateException("Kan niet in huidige state");
+    public void showVerloren() {
+        throw new IllegalStateException("Kan niet in huidige state");
     }
 
     @Override
-    public void showGewonnen(){
-        //Tegen controller zeggen laat de gewonnen box zien EN goksaldo verhogen
-        this.spel.setWinst();
-        this.spel.updateStrategyGewonnen();
-        this.spel.notifyObserver();
-        this.spel.changeState(new GameResetState(spel));
-
-
-        //In Spelverloop moet een knop zichtbaar worden om een nieuw spel te starten, of sessie te beeindigen
+    public void showGewonnen() {
+        throw new IllegalStateException("Kan niet in huidige state");
     }
 
     @Override
     public void resetGame() {
-        throw new IllegalStateException("Kan niet in huidige state");
-
+        this.spel.changeState(new WachtVoorInputState(spel));
     }
 }

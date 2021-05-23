@@ -24,5 +24,8 @@ public class GamblerViewController implements Observer {
     @Override
     public void update(){
         this.gamblerView.update();
+        if (this.spel.getState().getClass().getSimpleName().equalsIgnoreCase("GameResetState")){
+            this.gamblerView.reset();
+        }
     }
 }

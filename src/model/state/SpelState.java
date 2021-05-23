@@ -11,4 +11,5 @@ public interface SpelState {
     void verhoogInzet();
     void showVerloren();
     void showGewonnen();
+    void resetGame();
 }

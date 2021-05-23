@@ -46,4 +46,10 @@ public class WachtVoorInputState implements SpelState{
     public void showGewonnen(){
     throw new IllegalStateException("Kan niet in huidige state");
     }
+
+    @Override
+    public void resetGame() {
+        throw new IllegalStateException("Kan niet in huidige state");
+
+    }
 }

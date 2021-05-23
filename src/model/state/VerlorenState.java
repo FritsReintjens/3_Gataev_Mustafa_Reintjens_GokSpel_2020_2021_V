@@ -34,6 +34,7 @@ public class VerlorenState implements SpelState {
         //Tegen controller zeggen laat de verloren box zien
         this.spel.updateStrategyVerloren();
         this.spel.notifyObserver();
+        this.spel.changeState(new GameResetState(spel));
 
         //In Spelverloop moet een knop zichtbaar worden om een nieuw spel te starten, of sessie te beeindigen
 
@@ -42,5 +43,11 @@ public class VerlorenState implements SpelState {
     @Override
     public void showGewonnen(){
         throw new IllegalStateException("Kan niet in huidige state");
+    }
+
+    @Override
+    public void resetGame() {
+        throw new IllegalStateException("Kan niet in huidige state");
+
     }
 }

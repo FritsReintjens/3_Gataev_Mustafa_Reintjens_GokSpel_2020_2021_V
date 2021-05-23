@@ -207,4 +207,8 @@ private Collection<Observer> observers = new ArrayList<>();
         data.verhoogInzet(this.inzet + this.verhoogdeInzet);
         this.gokStrategyDB.getStrategyData().put(this.gokStrategy.getClass().getSimpleName(), data);
     }
+
+    public void resetGame() {
+        this.getState().resetGame();
+    }
 }

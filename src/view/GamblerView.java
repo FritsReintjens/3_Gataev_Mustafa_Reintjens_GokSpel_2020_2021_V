@@ -328,14 +328,11 @@ public class GamblerView extends GridPane {
             this.verhoogInzetLabel.setVisible(false);
             this.verhoogInzetField.setVisible(false);
         }
-        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
-            this.spelerField.setDisable(false);
-            this.spelerField.setText("");
-            this.
-
-        }
-        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
-
-        }
+    }
+    public void reset() {
+        this.verhoogInzetLabel.setVisible(false);
+        this.verhoogInzetField.setVisible(false);
+        this.spelerField.setDisable(false);
+        this.spelerField.setText("");
     }
 }
