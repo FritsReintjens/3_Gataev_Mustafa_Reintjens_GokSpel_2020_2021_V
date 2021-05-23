@@ -2,6 +2,7 @@ package model;
 
 import jxl.read.biff.BiffException;
 import model.database.SpelerDB;
+import model.database.GokStrategyDB;
 import model.database.loadSaveStrategy.LoadSaveFactory;
 import model.gokstrategy.EvenOgenStrategy;
 import model.gokstrategy.GokStrategy;
@@ -169,5 +170,39 @@ private Collection<Observer> observers = new ArrayList<>();
 
     public boolean gewonnen(){
         return gokStrategy.kanWinnen(worpen[3]);
+    }
+
+    public void setWinst(){
+        this.gokStrategy.getWinst(this.inzet+this.verhoogdeInzet);
+    }
+
+    public void showGewonnen(){
+        this.getState().showGewonnen();
+    }
+
+    public void showVerloren(){
+        this.getState().showVerloren();
+    }
+
+
+    public void updateStrategyGewonnen(){
+        System.out.println(this.gokStrategy.getClass().getSimpleName());
+        System.out.println(this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName()));
+        StrategyData data = this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName());
+        data.verhoogAantalGekozen();
+        data.verhoogAantalGewonnen();
+        data.verhoogInzet(this.inzet + this.verhoogdeInzet);
+        data.verhoogWinst(getWinst());
+        this.gokStrategyDB.getStrategyData().put(this.gokStrategy.getClass().getSimpleName(), data);
+
+    }
+
+    public void updateStrategyVerloren(){
+        System.out.println(this.gokStrategy.getClass().getSimpleName());
+        System.out.println(this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName()));
+        StrategyData data = this.gokStrategyDB.getStrategyData().get(this.gokStrategy.getClass().getSimpleName());
+        data.verhoogAantalGekozen();
+        data.verhoogInzet(this.inzet + this.verhoogdeInzet);
+        this.gokStrategyDB.getStrategyData().put(this.gokStrategy.getClass().getSimpleName(), data);
     }
 }

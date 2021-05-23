@@ -8,8 +8,10 @@ public enum GokStrategyEnum {
 
 
     private final String klassenaam;
+    private final String klassenaamSimpel;
 
-    GokStrategyEnum(String klassenaam){
+    GokStrategyEnum(String klassenaam, String klassenaamSimpel){
+        this.klassenaamSimpel = klassenaamSimpel;
         this.klassenaam = klassenaam;
     }
 
