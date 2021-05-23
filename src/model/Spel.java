@@ -34,10 +34,11 @@ public class Spel implements Observable {
 
 private Collection<Observer> observers = new ArrayList<>();
 
-    public Spel() throws BiffException, IOException {
+    public Spel(int spelVolgNummer) throws BiffException, IOException {
         this.spelerDB = new SpelerDB();
         this.gokStrategyDB = new GokStrategyDB();
         this.spelState = new WachtVoorInputState(this);
+        this.spelVolgNummer = spelVolgNummer;
     }
 
 

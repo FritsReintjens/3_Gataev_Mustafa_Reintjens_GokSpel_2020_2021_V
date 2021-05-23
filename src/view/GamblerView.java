@@ -303,6 +303,7 @@ public class GamblerView extends GridPane {
 
     public void update(){
         this.goksaldoLabel.setText("Je goksaldo is "+ this.controller.getSpel().getSpeler().getGoksaldo() + " €");
+
         if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
             this.resultLabel.setText("Helaas, je hebt verloren.");
             this.resultLabel.setTextFill(Color.RED);
@@ -326,6 +327,15 @@ public class GamblerView extends GridPane {
         if (!this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerhoogInzetState")){
             this.verhoogInzetLabel.setVisible(false);
             this.verhoogInzetField.setVisible(false);
+        }
+        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("GewonnenState")){
+            this.spelerField.setDisable(false);
+            this.spelerField.setText("");
+            this.
+
+        }
+        if (this.controller.getSpel().getState().getClass().getSimpleName().equalsIgnoreCase("VerlorenState")){
+
         }
     }
 }

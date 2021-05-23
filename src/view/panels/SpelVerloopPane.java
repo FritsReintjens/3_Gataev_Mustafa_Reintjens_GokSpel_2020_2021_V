@@ -11,6 +11,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import jxl.read.biff.BiffException;
+import model.Spel;
+
+import java.io.IOException;
 
 
 /**
@@ -19,7 +23,7 @@ import javafx.scene.layout.VBox;
 public class SpelVerloopPane extends GridPane {
     private SpelVerloopPaneController spelVerloopPaneController;
 
-    private VBox p1;
+    private VBox p1, p15;
     private HBox p11,p12,p13,p14;
     private Label spelVolgNummer,spelerNaam, inzet, gokStrategy, spelVolgNummerResult, spelerNaamResult, inzetResult, gokStrategyResult;
     private Button startNieuwButton, stopSessieButton;
@@ -52,20 +56,35 @@ public class SpelVerloopPane extends GridPane {
             this.p14 = new HBox(10);
             p14.getChildren().addAll(gokStrategy, gokStrategyResult);
 
-            this.p1 = new VBox(10);
-            this.p1.getChildren().addAll(p11, p12, p13, p14);
 
-            this.add(p1, 0, 1);
-/*
-        //KNOP start nieuw spel / Enkel zichtbaar in gewonnen of verloren state
+            this.p15 = new VBox(10);
+
+            //KNOP start nieuw spel / Enkel zichtbaar in gewonnen of verloren state
             this.startNieuwButton = new Button("Start nieuw spel");
 
-            startNieuwButton.setOnAction(event -> );
+            startNieuwButton.setOnAction(event -> {
+                try {
+                startNieuwSpel();
+                } catch (IOException e) {
+                e.printStackTrace();
+                } catch (BiffException e) {
+                e.printStackTrace();
+                }
+             });
 
-        //KNOP beeindig sessie / Enkel zichtbaar in gewonnen of verloren state
+            //KNOP beeindig sessie / Enkel zichtbaar in gewonnen of verloren state
             this.stopSessieButton = new Button("Stop sessie");
 
-            stopSessieButton.setOnAction();*/
+            stopSessieButton.setOnAction(event -> stopSessie());
+
+            p15.getChildren().addAll(startNieuwButton, stopSessieButton);
+
+            this.p1 = new VBox(10);
+            this.p1.getChildren().addAll(p11, p12, p13, p14, p15);
+
+            this.add(p1, 0, 1);
+
+
 
     }
     public void vulWaardenIn(){
@@ -80,12 +99,13 @@ public class SpelVerloopPane extends GridPane {
         }
     }
 
-    public void startNieuwSpel(){
-
+    public void startNieuwSpel() throws IOException, BiffException {
+        //Nieuw spel object met verhoogd volgnummer, alle parameters terug naar initial waarde, GamblerView resetten
+        this.spelVerloopPaneController.startNieuwSpel();
     }
 
     public void stopSessie(){
-
+        //Save spelergegevens naar bestand
     }
 
 

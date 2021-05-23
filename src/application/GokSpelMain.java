@@ -14,7 +14,7 @@ import java.io.IOException;
 public class GokSpelMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException, BiffException {
-		Spel facadeSpel = new Spel();
+		Spel facadeSpel = new Spel(0);
 		AdminViewController adminController = new AdminViewController(facadeSpel);
 		GamblerViewController gamblerViewController = new GamblerViewController(facadeSpel);
 		SpelVerloopPaneController spelVerloopPaneController = new SpelVerloopPaneController(facadeSpel);
