@@ -2,6 +2,10 @@ package model.state;
 
 import model.Spel;
 
+/**
+ * @Author team
+ */
+
 public class SpeelState implements SpelState {
     Spel spel;
     int aantalWorpen = 0;

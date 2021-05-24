@@ -3,6 +3,10 @@ package model.state;
 import model.Spel;
 import model.Speler;
 
+/**
+ * @Author team
+ */
+
 public class WachtVoorInputState implements SpelState{
     Spel spel;
 

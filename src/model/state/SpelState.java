@@ -2,6 +2,7 @@ package model.state;
 
 /**
  * Spel is de contextklasse
+ * @author team
  */
 
 public interface SpelState {

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import jxl.read.biff.BiffException;
 import model.gokstrategy.GokStrategyFactory;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.lang.invoke.LambdaConversionException;
 
 /**
- * @Author Jurgen Mustafa
+ * @Author team
  */
 
 public class InstellingenPane extends GridPane {
@@ -27,10 +28,11 @@ public class InstellingenPane extends GridPane {
     private VBox p0,p11,p12,p21,p22,p31;
     private HBox p1, p2,p3, p221, p222,p223,p224, p225;
     private TextField winstFactor1,winstFactor2, winstFactor3, winstFactor4;
-    private Label formaatLabel,selectGokStrategyLabel, gokStrategyTitel, winstFactorTitel;
+    private Label formaatLabel,selectGokStrategyLabel, gokStrategyTitel, winstFactorTitel, errorLbl1,errorLbl2,errorLbl3,errorLbl4;
     private Button saveButton;
     private CheckBox gokStrategy1, gokStrategy2, gokStrategy3, gokStrategy4;
     private RadioButton textButton, excelButton;
+    private boolean canSave;
 
     public InstellingenPane(InstellingenPaneController instellingenPaneController) {
         this.instellingenPaneController = instellingenPaneController;
@@ -79,10 +81,10 @@ public class InstellingenPane extends GridPane {
         this.winstFactor4 = new TextField();
 
         this.p221.getChildren().addAll(gokStrategyTitel, winstFactorTitel);
-        this.p222.getChildren().addAll(gokStrategy1, winstFactor1);
-        this.p223.getChildren().addAll(gokStrategy2, winstFactor2);
-        this.p224.getChildren().addAll(gokStrategy3, winstFactor3);
-        this.p225.getChildren().addAll(gokStrategy4, winstFactor4);
+        this.p222.getChildren().addAll(gokStrategy1, winstFactor1,errorLbl1);
+        this.p223.getChildren().addAll(gokStrategy2, winstFactor2,errorLbl2);
+        this.p224.getChildren().addAll(gokStrategy3, winstFactor3,errorLbl3);
+        this.p225.getChildren().addAll(gokStrategy4, winstFactor4,errorLbl4);
 
         this.p22.getChildren().addAll(p221,p222,p223,p224,p225);
 
@@ -115,11 +117,41 @@ public class InstellingenPane extends GridPane {
 
     private void setSettings(String format, boolean strat1, boolean strat2, boolean strat3, boolean strat4) throws BiffException, IOException {
         String strategies = "";
+        canSave = true;
 
-        strategies += (gokStrategy1.isSelected())?gokStrategy1.getText() + ":" + winstFactor1.getText() + ",":"";
-        strategies += (gokStrategy2.isSelected())?gokStrategy2.getText() + ":" + winstFactor2.getText() + ",":"";
-        strategies += (gokStrategy3.isSelected())?gokStrategy3.getText() + ":" + winstFactor3.getText() + ",":"";
-        strategies += (gokStrategy4.isSelected())?gokStrategy4.getText() + ":" + winstFactor4.getText() + ",":"";
+        if (gokStrategy1.isSelected()) {
+            if (!winstFactor1.getText().equals("")) {
+                int wf1 = Integer.parseInt(winstFactor1.getText());
+                if (wf1 < 1) errorLbl1.setVisible(true);
+                canSave = false;
+            }
+        }
+        if (gokStrategy2.isSelected()) {
+            if (!winstFactor2.getText().equals("")) {
+                int wf2 = Integer.parseInt(winstFactor2.getText());
+                if (wf2 < 1) errorLbl1.setVisible(true);
+                canSave = false;
+            }
+        }
+        if (gokStrategy3.isSelected()) {
+            if (!winstFactor3.getText().equals("")) {
+                int wf3 = Integer.parseInt(winstFactor3.getText());
+                if (wf3 < 1) errorLbl3.setVisible(true);
+                canSave = false;
+            }
+        }
+        if (gokStrategy4.isSelected()) {
+            if (!winstFactor4.getText().equals("")) {
+                int wf4 = Integer.parseInt(winstFactor4.getText());
+                if (wf4 < 1) errorLbl1.setVisible(true);
+                canSave = false;
+            }
+        }
+        if (canSave){
+            strategies += (gokStrategy1.isSelected()) ? gokStrategy1.getText() + ":" + winstFactor1.getText() + "," : "";
+            strategies += (gokStrategy2.isSelected()) ? gokStrategy2.getText() + ":" + winstFactor2.getText() + "," : "";
+            strategies += (gokStrategy3.isSelected()) ? gokStrategy3.getText() + ":" + winstFactor3.getText() + "," : "";
+            strategies += (gokStrategy4.isSelected()) ? gokStrategy4.getText() + ":" + winstFactor4.getText() + "," : "";
 
         if (strategies.length() > 0)strategies = strategies.substring(0, strategies.length()-1);
 

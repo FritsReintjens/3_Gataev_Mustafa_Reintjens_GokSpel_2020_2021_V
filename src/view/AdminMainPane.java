@@ -13,6 +13,10 @@ import view.panels.InstellingenPane;
 import view.panels.SpelVerloopPane;
 import view.panels.StatistiekenPane;
 
+/**
+ * @Author team
+ */
+
 public class AdminMainPane extends BorderPane {
 
         public AdminMainPane(SpelVerloopPaneController spelVerloopPaneController, GamblerOverviewPaneController gamblerOverviewPaneController, StatistiekPaneController statistiekPaneController, InstellingenPaneController instellingenPaneController){

@@ -2,6 +2,10 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * @Author team
+ */
+
 public class StrategyData {
     private String naam;
     private int aantalKeerGekozen;

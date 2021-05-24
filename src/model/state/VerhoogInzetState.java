@@ -2,6 +2,10 @@ package model.state;
 
 import model.Spel;
 
+/**
+ * @Author team
+ */
+
 public class VerhoogInzetState implements SpelState{
     Spel spel;
 

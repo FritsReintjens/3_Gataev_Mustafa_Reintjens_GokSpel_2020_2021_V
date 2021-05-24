@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import view.panels.GamblerOverviewPane;
 
+/**
+ * @Author team
+ */
+
+
 public class AdminView {
 	private Stage stage = new Stage();
 		

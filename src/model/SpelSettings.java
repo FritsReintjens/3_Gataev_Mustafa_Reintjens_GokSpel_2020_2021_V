@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * @Author team
+ */
+
 public class SpelSettings {
     private Properties properties = new Properties();
 

@@ -12,6 +12,10 @@ import javafx.scene.layout.GridPane;
 import model.StrategyData;
 import model.database.GokStrategyDB;
 
+/**
+ * @Author team
+ */
+
 public class StatistiekenPane extends GridPane {
     private StatistiekPaneController statistiekPaneController;
     private TableView<StrategyData> table;

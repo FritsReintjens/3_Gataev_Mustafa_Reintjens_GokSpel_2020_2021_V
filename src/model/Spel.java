@@ -12,6 +12,10 @@ import model.state.*;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @Author team
+ */
+
 
 public class Spel implements Observable {
     private SpelerDB spelerDB;
