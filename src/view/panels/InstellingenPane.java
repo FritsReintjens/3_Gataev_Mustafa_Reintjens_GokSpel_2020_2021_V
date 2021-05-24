@@ -24,8 +24,9 @@ public class InstellingenPane extends GridPane {
 
     private InstellingenPaneController instellingenPaneController;
     private VBox p0,p11,p12,p21,p22,p31;
-    private HBox p1, p2,p3;
-    private Label formaatLabel,selectGokStrategyLabel;
+    private HBox p1, p2,p3, p221, p222,p223,p224, p225;
+    private TextField winstFactor1,winstFactor2, winstFactor3, winstFactor4;
+    private Label formaatLabel,selectGokStrategyLabel, gokStrategyTitel, winstFactorTitel;
     private Button saveButton;
     private CheckBox gokStrategy1, gokStrategy2, gokStrategy3, gokStrategy4;
     private RadioButton textButton, excelButton;
@@ -56,11 +57,33 @@ public class InstellingenPane extends GridPane {
         p21.getChildren().addAll(selectGokStrategyLabel);
 
         this.p22 = new VBox(10);
+
+        this.p221 = new HBox(10);
+        this.p222 = new HBox(10);
+        this.p223 = new HBox(10);
+        this.p224 = new HBox(10);
+        this.p225 = new HBox(10);
+
+        this.gokStrategyTitel = new Label("Gokstrategy:");
+        this.winstFactorTitel = new Label("Winstafactor:");
+
         this.gokStrategy1 = new CheckBox("EvenOgenStrategy");
         this.gokStrategy2 = new CheckBox("SomOgenStrategy");
         this.gokStrategy3 = new CheckBox("WorpenOplopendStrategy");
         this.gokStrategy4 = new CheckBox("WinStrategy");
-        p22.getChildren().addAll(gokStrategy1, gokStrategy2, gokStrategy3, gokStrategy4);
+
+        this.winstFactor1 = new TextField();
+        this.winstFactor2 = new TextField();
+        this.winstFactor3 = new TextField();
+        this.winstFactor4 = new TextField();
+
+        this.p221.getChildren().addAll(gokStrategyTitel, winstFactorTitel);
+        this.p222.getChildren().addAll(gokStrategy1, winstFactor1);
+        this.p223.getChildren().addAll(gokStrategy2, winstFactor2);
+        this.p224.getChildren().addAll(gokStrategy3, winstFactor3);
+        this.p225.getChildren().addAll(gokStrategy4, winstFactor4);
+
+        this.p22.getChildren().addAll(p221,p222,p223,p224,p225);
 
         this.p31 = new VBox(10);
         this.saveButton = new Button("Save");
