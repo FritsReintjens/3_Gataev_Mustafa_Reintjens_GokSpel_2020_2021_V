@@ -80,31 +80,31 @@ public class GamblerView extends GridPane {
         this.p221 = new VBox(10);
         final ToggleGroup tGroup = new ToggleGroup();
 
-        this.rgs1 = new RadioButton("Het aantal ogen bij elke worp is een " + "even" + " getal");
+        this.rgs1 = new RadioButton("");
         rgs1.setToggleGroup(tGroup);
         rgs1.setSelected(true);
         rgs1.setVisible(false);
 
 
-        this.rgs2 = new RadioButton("de som van de ogen van alle worpen samen is " + 21);
+        this.rgs2 = new RadioButton("");
         rgs2.setToggleGroup(tGroup);
         rgs2.setVisible(false);
 
-        this.rgs3 = new RadioButton("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp");
+        this.rgs3 = new RadioButton("");
         rgs3.setToggleGroup(tGroup);
         rgs3.setVisible(false);
 
-        this.rgs4 = new RadioButton("win");
+        this.rgs4 = new RadioButton("");
         rgs4.setToggleGroup(tGroup);
         rgs4.setVisible(false);
 
 
         p221.getChildren().addAll(rgs1, rgs2, rgs3,rgs4);
         this.p222 = new VBox(10);
-        this.strategy1Label = new Label("mogelijke winst is " + 4 + "x je inzet");
-        this.strategy2Label = new Label("mogelijke winst is " + 5 + "x je inzet");
-        this.strategy3Label = new Label("mogelijke winst is " + 10 + "x je inzet");
-        this.strategy4Label = new Label("mogelijke winst is " + 10 + "x je inzet");
+        this.strategy1Label = new Label("");
+        this.strategy2Label = new Label("");
+        this.strategy3Label = new Label("");
+        this.strategy4Label = new Label("");
         p222.getChildren().addAll(strategy1Label, strategy2Label, strategy3Label, strategy4Label);
 
         this.p321 = new VBox();

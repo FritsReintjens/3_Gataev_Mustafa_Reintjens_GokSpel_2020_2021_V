@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -91,10 +92,10 @@ public class InstellingenPane extends GridPane {
     private void setSettings(String format, boolean strat1, boolean strat2, boolean strat3, boolean strat4) throws BiffException, IOException {
         String strategies = "";
 
-        strategies += (strat1)?gokStrategy1.getText() + ",":"";
-        strategies += (strat2)?gokStrategy2.getText() + ",":"";
-        strategies += (strat3)?gokStrategy3.getText() + ",":"";
-        strategies += (strat4)?gokStrategy4.getText() + ",":"";
+        strategies += (gokStrategy1.isSelected())?gokStrategy1.getText() + ":" + winstFactor1.getText() + ",":"";
+        strategies += (gokStrategy2.isSelected())?gokStrategy2.getText() + ":" + winstFactor2.getText() + ",":"";
+        strategies += (gokStrategy3.isSelected())?gokStrategy3.getText() + ":" + winstFactor3.getText() + ",":"";
+        strategies += (gokStrategy4.isSelected())?gokStrategy4.getText() + ":" + winstFactor4.getText() + ",":"";
 
         if (strategies.length() > 0)strategies = strategies.substring(0, strategies.length()-1);
 

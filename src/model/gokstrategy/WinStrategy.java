@@ -17,4 +17,9 @@ public class WinStrategy implements GokStrategy{
     public boolean kanWinnen(int aantalOgen){
         return true;
     }
+
+    @Override
+    public void setWinstFactor(int winstFactor) {
+        this.winstFactor = winstFactor;
+    }
 }

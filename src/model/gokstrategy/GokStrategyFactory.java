@@ -1,5 +1,7 @@
 package model.gokstrategy;
 
+import java.util.ArrayList;
+
 public class GokStrategyFactory {
     private static GokStrategyFactory uniqueInstance;
 
@@ -25,5 +27,18 @@ public class GokStrategyFactory {
             uniqueInstance = new GokStrategyFactory();
         }
         return uniqueInstance;
+    }
+
+    public ArrayList<GokStrategy> getAllStrategies() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ArrayList<GokStrategy> strategies = new ArrayList<>();
+
+        for (GokStrategyEnum strategy : GokStrategyEnum.values()){
+            GokStrategy gokStrategy = null;
+            String klasseNaam = strategy.getKlassenaam();
+            Class gokStrategyClass = Class.forName(klasseNaam);
+            gokStrategy = (GokStrategy) gokStrategyClass.newInstance();
+            strategies.add(gokStrategy);
+        }
+        return strategies;
     }
 }

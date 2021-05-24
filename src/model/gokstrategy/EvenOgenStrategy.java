@@ -21,4 +21,9 @@ public class EvenOgenStrategy implements GokStrategy{
     public boolean kanWinnen(int aantalOgen){
         return aantalOgen % 2 == 0;
     }
+
+    @Override
+    public void setWinstFactor(int winstFactor) {
+        this.winstFactor = winstFactor;
+    }
 }

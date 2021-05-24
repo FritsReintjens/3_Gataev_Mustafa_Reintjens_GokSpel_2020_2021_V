@@ -4,9 +4,7 @@ import jxl.read.biff.BiffException;
 import model.database.SpelerDB;
 import model.database.GokStrategyDB;
 import model.database.loadSaveStrategy.LoadSaveFactory;
-import model.gokstrategy.EvenOgenStrategy;
-import model.gokstrategy.GokStrategy;
-import model.gokstrategy.GokStrategyFactory;
+import model.gokstrategy.*;
 import model.observer.Observable;
 import model.observer.Observer;
 import model.state.*;
@@ -36,13 +34,15 @@ public class Spel implements Observable {
 
 private Collection<Observer> observers = new ArrayList<>();
 
-    public Spel(int spelVolgNummer) throws BiffException, IOException {
+    public Spel(int spelVolgNummer) throws BiffException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.gokStrategyDB = new GokStrategyDB();
         this.spelState = new WachtVoorInputState(this);
         this.spelVolgNummer = spelVolgNummer;
         this.spelSettings = new SpelSettings();
         this.spelerDB = new SpelerDB(spelSettings.getSpelSetting("LoadSaveFormat"));
-        this.activeStrategies = this.spelSettings.getSpelSetting("Strategies");
+        this.stratFactorMap = new HashMap<>();
+        setAllStrategies();
+        setActiveStrategies();
 
     }
 
@@ -149,6 +149,14 @@ private Collection<Observer> observers = new ArrayList<>();
     public void setStrategy() {
        GokStrategyFactory factory = GokStrategyFactory.getInstance();
        this.gokStrategy = factory.createGokStrategy(this.enumString);
+    }
+
+    public ArrayList<GokStrategy> getAllStrategies(){
+        return alleStrategies;
+    }
+
+    public void setAllStrategies() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        this.alleStrategies = GokStrategyFactory.getInstance().getAllStrategies();
     }
 
     public GokStrategy getGokStrategy(){

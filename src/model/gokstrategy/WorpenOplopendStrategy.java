@@ -30,4 +30,9 @@ public class WorpenOplopendStrategy implements GokStrategy{
         }
         return false;
     }
+
+    @Override
+    public void setWinstFactor(int winstFactor) {
+        this.winstFactor = winstFactor;
+    }
 }

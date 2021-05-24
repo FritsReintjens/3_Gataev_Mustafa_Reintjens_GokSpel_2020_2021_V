@@ -24,5 +24,7 @@ public interface GokStrategy {
      */
     boolean kanWinnen(int aantalOgen);
 
+    void setWinstFactor(int winstFactor);
+
 
 }

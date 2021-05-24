@@ -42,5 +42,4 @@ public class SpelSettings {
     public void setGokStrategiesProperty(String strategies){
         properties.setProperty("Strategies", strategies);
     }
-
 }

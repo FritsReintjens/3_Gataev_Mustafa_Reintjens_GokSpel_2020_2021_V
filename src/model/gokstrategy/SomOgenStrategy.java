@@ -11,7 +11,7 @@ public class SomOgenStrategy implements GokStrategy{
 
     @Override
     public String beschrijving(){
-        return "de som van de ogen van alle worpen samen is 21 \t mogelijke winst is " + this.winstFactor + " x je inzet";
+        return "de som van de ogen van alle worpen samen is " + aantalOgen +  "\t mogelijke winst is " + this.winstFactor + " x je inzet";
     }
 
     @Override
@@ -28,5 +28,10 @@ public class SomOgenStrategy implements GokStrategy{
         if (counter == 4)
             return som == 21;
         return false;
+    }
+
+    @Override
+    public void setWinstFactor(int winstFactor) {
+        this.winstFactor = winstFactor;
     }
 }
