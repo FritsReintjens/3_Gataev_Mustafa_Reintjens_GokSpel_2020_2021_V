@@ -267,15 +267,11 @@ public class GamblerView extends GridPane {
     }
 
     public void bevestigKeuze(String strategy){
-        System.out.println("DIT IS DE PARAMETER: "+strategy);
         this.p3.setVisible(true);
         if (strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("EvenOgenStrategy").beschrijving())){
-            System.out.println("1");
-
             this.controller.getSpel().setEnumString("EvenOgenStrategy");
         }
         else if(strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("SomOgenStrategy").beschrijving())){
-            System.out.println("2");
             this.controller.getSpel().setEnumString("SomOgenStrategy");
         }
         else if(strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("WorpenOplopendStrategy").beschrijving())){

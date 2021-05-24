@@ -27,7 +27,7 @@ public class InstellingenPane extends GridPane {
     private VBox p0,p11,p12,p21,p22,p31;
     private HBox p1, p2,p3, p221, p222,p223,p224, p225;
     private TextField winstFactor1,winstFactor2, winstFactor3, winstFactor4;
-    private Label formaatLabel,selectGokStrategyLabel, gokStrategyTitel, winstFactorTitel, errorLbl1,errorLbl2,errorLbl3,errorLbl4;
+    private Label formaatLabel,selectGokStrategyLabel, gokStrategyTitel, winstFactorTitel, errorLbl1,errorLbl2,errorLbl3,errorLbl4,errorLbl5;
     private Button saveButton;
     private CheckBox gokStrategy1, gokStrategy2, gokStrategy3, gokStrategy4;
     private RadioButton textButton, excelButton;
@@ -58,14 +58,17 @@ public class InstellingenPane extends GridPane {
         this.errorLbl2 = new Label("Winstfactor moet >= 1 zijn");
         this.errorLbl3 = new Label("Winstfactor moet >= 1 zijn");
         this.errorLbl4 = new Label("Winstfactor moet >= 1 zijn");
+        this.errorLbl5 = new Label("Minstens 1 strategy moet gekozen zijn!");
         errorLbl1.setTextFill(Color.RED);
         errorLbl2.setTextFill(Color.RED);
         errorLbl3.setTextFill(Color.RED);
         errorLbl4.setTextFill(Color.RED);
+        errorLbl5.setTextFill(Color.RED);
         errorLbl1.setVisible(false);
         errorLbl2.setVisible(false);
         errorLbl3.setVisible(false);
         errorLbl4.setVisible(false);
+        errorLbl5.setVisible(false);
 
         this.p21 = new VBox(10);
         this.selectGokStrategyLabel = new Label("selecteer gokstrategien");
@@ -92,7 +95,7 @@ public class InstellingenPane extends GridPane {
         this.winstFactor3 = new TextField();
         this.winstFactor4 = new TextField();
 
-        this.p221.getChildren().addAll(gokStrategyTitel, winstFactorTitel);
+        this.p221.getChildren().addAll(gokStrategyTitel, winstFactorTitel, errorLbl5);
         this.p222.getChildren().addAll(gokStrategy1, winstFactor1,errorLbl1);
         this.p223.getChildren().addAll(gokStrategy2, winstFactor2,errorLbl2);
         this.p224.getChildren().addAll(gokStrategy3, winstFactor3,errorLbl3);
@@ -104,7 +107,7 @@ public class InstellingenPane extends GridPane {
         this.saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
             try {
-                setSettings(((RadioButton)(tGroup.getSelectedToggle())).getText(), gokStrategy1.isSelected(), gokStrategy2.isSelected(), gokStrategy3.isSelected(), gokStrategy4.isSelected());
+                setSettings(((RadioButton)(tGroup.getSelectedToggle())).getText());
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -127,39 +130,64 @@ public class InstellingenPane extends GridPane {
         this.add(p0,0,1);
     }
 
-    private void setSettings(String format, boolean strat1, boolean strat2, boolean strat3, boolean strat4) throws BiffException, IOException {
+    private void setSettings(String format) throws BiffException, IOException {
         String strategies = "";
         canSave = true;
+        int teller = 0;
 
         if (gokStrategy1.isSelected()) {
-            if (!winstFactor1.getText().equals("")) {
-                int wf1 = Integer.parseInt(winstFactor1.getText());
-                if (wf1 < 1) errorLbl1.setVisible(true);
+            teller++;
+            if ((winstFactor1.getText() == null) || (winstFactor1.getText().isEmpty())) {
+                errorLbl1.setVisible(true);
+                canSave = false;
+            }
+            if (Integer.parseInt(winstFactor1.getText())<1){
+                errorLbl1.setVisible(true);
                 canSave = false;
             }
         }
         if (gokStrategy2.isSelected()) {
-            if (!winstFactor2.getText().equals("")) {
-                int wf2 = Integer.parseInt(winstFactor2.getText());
-                if (wf2 < 1) errorLbl1.setVisible(true);
+            teller++;
+            if ((winstFactor2.getText() == null) || (winstFactor2.getText().isEmpty())) {
+                errorLbl2.setVisible(true);
+                canSave = false;
+            }
+            if (Integer.parseInt(winstFactor2.getText())<1){
+                errorLbl2.setVisible(true);
                 canSave = false;
             }
         }
         if (gokStrategy3.isSelected()) {
-            if (!winstFactor3.getText().equals("")) {
-                int wf3 = Integer.parseInt(winstFactor3.getText());
-                if (wf3 < 1) errorLbl3.setVisible(true);
+            teller++;
+            if ((winstFactor3.getText() == null) || (winstFactor3.getText().isEmpty())) {
+                errorLbl3.setVisible(true);
+                canSave = false;
+            }
+            if (Integer.parseInt(winstFactor3.getText())<1){
+                errorLbl3.setVisible(true);
                 canSave = false;
             }
         }
         if (gokStrategy4.isSelected()) {
-            if (!winstFactor4.getText().equals("")) {
-                int wf4 = Integer.parseInt(winstFactor4.getText());
-                if (wf4 < 1) errorLbl1.setVisible(true);
+            teller++;
+            if ((winstFactor4.getText() == null) || (winstFactor4.getText().isEmpty())) {
+                errorLbl4.setVisible(true);
+                canSave = false;
+            }
+            if (Integer.parseInt(winstFactor4.getText())<1){
+                errorLbl4.setVisible(true);
                 canSave = false;
             }
         }
-        if (canSave){
+        if (teller == 0){
+            errorLbl5.setVisible(true);
+        }
+        if (canSave && teller != 0){
+            errorLbl1.setVisible(false);
+            errorLbl2.setVisible(false);
+            errorLbl3.setVisible(false);
+            errorLbl4.setVisible(false);
+            errorLbl5.setVisible(false);
             strategies += (gokStrategy1.isSelected()) ? gokStrategy1.getText() + ":" + winstFactor1.getText() + "," : "";
             strategies += (gokStrategy2.isSelected()) ? gokStrategy2.getText() + ":" + winstFactor2.getText() + "," : "";
             strategies += (gokStrategy3.isSelected()) ? gokStrategy3.getText() + ":" + winstFactor3.getText() + "," : "";
