@@ -2,6 +2,10 @@ package model.gokstrategy;
 
 import java.util.ArrayList;
 
+/**
+ * @Author team
+ */
+
 public class GokStrategyFactory {
     private static GokStrategyFactory uniqueInstance;
 

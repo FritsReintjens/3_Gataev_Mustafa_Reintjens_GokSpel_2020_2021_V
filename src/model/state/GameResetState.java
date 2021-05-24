@@ -2,6 +2,10 @@ package model.state;
 
 import model.Spel;
 
+/**
+ * @Author team
+ */
+
 public class GameResetState implements SpelState {
 
     private Spel spel;

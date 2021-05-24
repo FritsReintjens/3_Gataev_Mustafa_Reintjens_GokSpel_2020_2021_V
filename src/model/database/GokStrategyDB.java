@@ -6,6 +6,9 @@ import model.gokstrategy.GokStrategyEnum;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @Author team
+ */
 public class GokStrategyDB {
     private Map<String, StrategyData> strategyData;
 

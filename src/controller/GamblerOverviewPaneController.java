@@ -4,6 +4,10 @@ import model.Spel;
 import model.observer.Observer;
 import view.panels.GamblerOverviewPane;
 
+/**
+ * @Author team
+ */
+
 public class GamblerOverviewPaneController implements Observer {
     private Spel spelFacade;
     private GamblerOverviewPane gamblerOverviewPane;

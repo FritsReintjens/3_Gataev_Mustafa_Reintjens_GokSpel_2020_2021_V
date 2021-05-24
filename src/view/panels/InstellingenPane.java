@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 import jxl.read.biff.BiffException;
 import model.gokstrategy.GokStrategyFactory;
 
-import java.awt.*;
 import java.io.IOException;
 import java.lang.invoke.LambdaConversionException;
 
@@ -54,6 +53,19 @@ public class InstellingenPane extends GridPane {
         this.excelButton = new RadioButton("EXCEL");
         excelButton.setToggleGroup(tGroup);
         p12.getChildren().addAll(textButton, excelButton);
+
+        this.errorLbl1 = new Label("Winstfactor moet >= 1 zijn");
+        this.errorLbl2 = new Label("Winstfactor moet >= 1 zijn");
+        this.errorLbl3 = new Label("Winstfactor moet >= 1 zijn");
+        this.errorLbl4 = new Label("Winstfactor moet >= 1 zijn");
+        errorLbl1.setTextFill(Color.RED);
+        errorLbl2.setTextFill(Color.RED);
+        errorLbl3.setTextFill(Color.RED);
+        errorLbl4.setTextFill(Color.RED);
+        errorLbl1.setVisible(false);
+        errorLbl2.setVisible(false);
+        errorLbl3.setVisible(false);
+        errorLbl4.setVisible(false);
 
         this.p21 = new VBox(10);
         this.selectGokStrategyLabel = new Label("selecteer gokstrategien");

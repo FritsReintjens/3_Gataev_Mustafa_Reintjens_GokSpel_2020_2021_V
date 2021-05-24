@@ -1,5 +1,8 @@
 package model.gokstrategy;
 
+/**
+ * @Author team
+ */
 
 public enum GokStrategyEnum {
     EVENOGEN("model.gokstrategy.EvenOgenStrategy", "EvenOgenStrategy"),

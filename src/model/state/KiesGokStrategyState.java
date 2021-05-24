@@ -2,6 +2,9 @@ package model.state;
 
 import model.Spel;
 
+/**
+ * @Author team
+ */
 public class KiesGokStrategyState implements SpelState {
     Spel spel;
 

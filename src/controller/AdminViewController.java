@@ -4,6 +4,10 @@ import model.Spel;
 import model.observer.Observable;
 import model.observer.Observer;
 
+/**
+ * @Author team
+ */
+
 public class AdminViewController implements Observer {
     private Spel spelFacade;
 

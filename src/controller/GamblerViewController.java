@@ -4,6 +4,10 @@ import model.Spel;
 import model.observer.Observer;
 import view.GamblerView;
 
+/**
+ * @Author team
+ */
+
 public class GamblerViewController implements Observer {
     private GamblerView gamblerView;
     private Spel spel;
