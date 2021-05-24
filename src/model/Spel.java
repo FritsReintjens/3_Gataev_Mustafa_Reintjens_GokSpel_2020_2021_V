@@ -10,14 +10,13 @@ import model.observer.Observer;
 import model.state.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 
 public class Spel implements Observable {
     private SpelerDB spelerDB;
     private GokStrategyDB gokStrategyDB;
+    private ArrayList<GokStrategy> alleStrategies;
     private StrategyData strategyData;
     private int spelVolgNummer = 0;
     private Speler speler;
@@ -29,10 +28,10 @@ public class Spel implements Observable {
     private GokStrategy gokStrategy;
     private int[] worpen;
     private int aantalWorpen;
-    private String activeStrategies;
+    private Map<String,Integer> stratFactorMap;
     private SpelSettings spelSettings;
 
-private Collection<Observer> observers = new ArrayList<>();
+    private Collection<Observer> observers = new ArrayList<>();
 
     public Spel(int spelVolgNummer) throws BiffException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.gokStrategyDB = new GokStrategyDB();
@@ -46,12 +45,33 @@ private Collection<Observer> observers = new ArrayList<>();
 
     }
 
-    public String getActiveStrategies() {
-        return activeStrategies;
+    public Map<String,Integer> getActiveStrategies() {
+        return stratFactorMap;
     }
 
     public void setActiveStrategies(){
-        this.activeStrategies = this.spelSettings.getSpelSetting("Strategies");
+        this.stratFactorMap = new HashMap<>();
+        String stratFactor = this.spelSettings.getSpelSetting("Strategies");
+        String[] arrayStratFactor = stratFactor.split(",");
+
+        for (int i = 0; i < arrayStratFactor.length; i++){
+            this.stratFactorMap.put(arrayStratFactor[i].split(":")[0], Integer.parseInt(arrayStratFactor[i].split(":")[1]));
+        }
+        for (GokStrategy gokStrategy: getAllStrategies()) {
+            if (stratFactorMap.containsKey(gokStrategy.getClass().getSimpleName())){
+                gokStrategy.setWinstFactor(stratFactorMap.get(gokStrategy.getClass().getSimpleName()));
+            }
+        }
+
+    }
+
+    public GokStrategy findStrategyInAlleStrategies(String simpleClassName){
+        for (GokStrategy s: getAllStrategies()) {
+            if (s.getClass().getSimpleName().equalsIgnoreCase(simpleClassName)){
+                return s;
+            }
+        }
+        return null;
     }
 
     public Map<String,Speler> getSpelers(){
@@ -147,8 +167,12 @@ private Collection<Observer> observers = new ArrayList<>();
     }
 
     public void setStrategy() {
-       GokStrategyFactory factory = GokStrategyFactory.getInstance();
-       this.gokStrategy = factory.createGokStrategy(this.enumString);
+        this.gokStrategy = null;
+        for (GokStrategy strategy: getAllStrategies()) {
+            if (strategy.getClass().getSimpleName().equalsIgnoreCase(this.enumString)){
+                gokStrategy = strategy;
+            }
+        }
     }
 
     public ArrayList<GokStrategy> getAllStrategies(){

@@ -244,34 +244,44 @@ public class GamblerView extends GridPane {
         //HIER GEEF JE DE SPELER DOOR AAN DE FACADE
         this.controller.getSpel().setSpeler(this.gegevenSpelersNaam);
         this.controller.getSpel().setInzet(this.inzet);
-        if (controller.getSpel().getActiveStrategies().contains("EvenOgenStrategy")) {
+
+        if (controller.getSpel().getActiveStrategies().containsKey("EvenOgenStrategy")) {
+            this.rgs1.setText(this.controller.getSpel().findStrategyInAlleStrategies("EvenOgenStrategy").beschrijving());
             rgs1.setVisible(true);
         }
-        if (controller.getSpel().getActiveStrategies().contains("SomOgenStrategy")) {
+        if (controller.getSpel().getActiveStrategies().containsKey("SomOgenStrategy")) {
+            this.rgs2.setText(this.controller.getSpel().findStrategyInAlleStrategies("SomOgenStrategy").beschrijving());
             rgs2.setVisible(true);
         }
-        if (controller.getSpel().getActiveStrategies().contains("WorpenOplopendStrategy")) {
+        if (controller.getSpel().getActiveStrategies().containsKey("WorpenOplopendStrategy")) {
+            this.rgs3.setText(this.controller.getSpel().findStrategyInAlleStrategies("WorpenOplopendStrategy").beschrijving());
             rgs3.setVisible(true);
         }
-        if (controller.getSpel().getActiveStrategies().contains("WinStrategy")) {
+        if (controller.getSpel().getActiveStrategies().containsKey("WinStrategy")) {
+            this.rgs4.setText(this.controller.getSpel().findStrategyInAlleStrategies("WinStrategy").beschrijving());
             rgs4.setVisible(true);
+
         }
         this.controller.getSpel().startSpel();
         this.startButton.setDisable(true);
     }
 
     public void bevestigKeuze(String strategy){
+        System.out.println("DIT IS DE PARAMETER: "+strategy);
         this.p3.setVisible(true);
-        if (strategy.equalsIgnoreCase("de som van de ogen van alle worpen samen is 21")){
-            this.controller.getSpel().setEnumString("SOMOGEN");
+        if (strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("EvenOgenStrategy").beschrijving())){
+            System.out.println("1");
+
+            this.controller.getSpel().setEnumString("EvenOgenStrategy");
         }
-        else if(strategy.equalsIgnoreCase("Het aantal ogen bij elke worp is een even getal")){
-            this.controller.getSpel().setEnumString("EVENOGEN");
+        else if(strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("SomOgenStrategy").beschrijving())){
+            System.out.println("2");
+            this.controller.getSpel().setEnumString("SomOgenStrategy");
         }
-        else if(strategy.equalsIgnoreCase("het aantal ogen is bij elke worp " + "hoger" + " dan bij de vorige worp")){
-            this.controller.getSpel().setEnumString("WOPRENOPLOPEND");
+        else if(strategy.equalsIgnoreCase(this.controller.getSpel().findStrategyInAlleStrategies("WorpenOplopendStrategy").beschrijving())){
+            this.controller.getSpel().setEnumString("WorpenOplopendStrategy");
         } else {
-            this.controller.getSpel().setEnumString("WIN");
+            this.controller.getSpel().setEnumString("WinStrategy");
         }
         this.controller.getSpel().bevestigKeuze();
         this.bevestigButton.setDisable(true);

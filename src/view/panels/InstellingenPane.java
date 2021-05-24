@@ -2,6 +2,7 @@ package view.panels;
 
 import controller.InstellingenPaneController;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
