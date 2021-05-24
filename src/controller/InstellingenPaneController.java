@@ -9,6 +9,9 @@ import view.panels.InstellingenPane;
 
 import java.io.IOException;
 
+/**
+ * @Author team
+ */
 public class InstellingenPaneController implements Observer {
     private Spel spelFacade;
     private InstellingenPane instellingenPane;

@@ -7,7 +7,9 @@ import jxl.write.WriteException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @Author team
+ */
 public interface LoadSaveStrategy<Key,Value> {
 
     public Map<Key, Value> load(String filenaam) throws IOException, BiffException;

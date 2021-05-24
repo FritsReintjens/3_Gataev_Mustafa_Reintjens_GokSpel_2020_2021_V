@@ -11,6 +11,9 @@ import view.panels.GamblerOverviewPane;
 
 import java.io.IOException;
 
+/**
+ * @Author team
+ */
 public class GokSpelMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException, BiffException, ClassNotFoundException, InstantiationException, IllegalAccessException {

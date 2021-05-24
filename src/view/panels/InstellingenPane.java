@@ -165,9 +165,10 @@ public class InstellingenPane extends GridPane {
             strategies += (gokStrategy3.isSelected()) ? gokStrategy3.getText() + ":" + winstFactor3.getText() + "," : "";
             strategies += (gokStrategy4.isSelected()) ? gokStrategy4.getText() + ":" + winstFactor4.getText() + "," : "";
 
-        if (strategies.length() > 0)strategies = strategies.substring(0, strategies.length()-1);
+            if (strategies.length() > 0) strategies = strategies.substring(0, strategies.length() - 1);
 
-        this.instellingenPaneController.setSettingToProperty(format,strategies);
-        this.instellingenPaneController.spelerDBFormat(format);
+            this.instellingenPaneController.setSettingToProperty(format, strategies);
+            this.instellingenPaneController.spelerDBFormat(format);
+        }
     }
 }

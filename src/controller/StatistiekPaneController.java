@@ -4,6 +4,9 @@ import model.Spel;
 import model.observer.Observer;
 import view.panels.StatistiekenPane;
 
+/**
+ * @Author team
+ */
 public class StatistiekPaneController implements Observer {
     private Spel spelFacade;
     private StatistiekenPane statistiekenPane;

@@ -8,6 +8,9 @@ import view.panels.SpelVerloopPane;
 
 import java.io.IOException;
 
+/**
+ * @Author team
+ */
 public class SpelVerloopPaneController implements Observer {
     private SpelVerloopPane spelVerloopPane;
     private Spel spelFacade;

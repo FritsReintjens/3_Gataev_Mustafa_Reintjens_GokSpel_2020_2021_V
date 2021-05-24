@@ -5,7 +5,9 @@ import model.Speler;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * @Author team
+ */
 public class SpelerTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy{
 
     public SpelerTekstLoadSaveStrategy(){
